@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GetURLContent.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="RegExPatternFirst" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">(\$\("#myUniqueImg"\)\.attr\("src",")(\b(?:(?:https?|ftp|file|[A-Za-z]+):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&amp;@#\/%=~_ |$?!:,.]*\)|[-A-Z0-9+&amp;@#\/%=~_ |$?!:,.])*(?:\([-A-Z0-9+&amp;@#\/%=~_ |$?!:,.]*\)|[A-Z0-9+&amp;@#\/%=~_ |$]))</Value>
+    </Setting>
+    <Setting Name="RegexPatternSecond" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">(\b(?:(?:https?|ftp|file|[A-Za-z]+):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&amp;@#\/%=~_ |$?!:,.]*\)|[-A-Z0-9+&amp;@#\/%=~_ |$?!:,.])*(?:\([-A-Z0-9+&amp;@#\/%=~_ |$?!:,.]*\)|[A-Z0-9+&amp;@#\/%=~_ |$]))</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
