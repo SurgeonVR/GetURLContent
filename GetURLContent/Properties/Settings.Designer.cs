@@ -44,5 +44,27 @@ namespace GetURLContent.Properties {
                 return ((string)(this["RegexPatternSecond"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<img id=\"photo\" src=\"(\\b(?:(?:https?|ftp|file|[A-Za-z]+):\\/\\/|www\\.|ftp\\.)(?:\\([-" +
+            "A-Z0-9+&@#\\/%=~_ |$?!:,.]*\\)|[-A-Z0-9+&@#\\/%=~_ |$?!:,.])*(?:\\([-A-Z0-9+&@#\\/%=~" +
+            "_ |$?!:,.]*\\)|[A-Z0-9+&@#\\/%=~_ |$]))")]
+        public string RegExPatternFirstImagezilla {
+            get {
+                return ((string)(this["RegExPatternFirstImagezilla"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("href=\"(\\b(?:(?:https?|ftp|file|[A-Za-z]+):\\/\\/|www\\.|ftp\\.)(?:\\([-A-Z0-9+&@#\\/%=~" +
+            "_ |$?!:,.]*\\)|[-A-Z0-9+&@#\\/%=~_ |$?!:,.])*(?:\\([-A-Z0-9+&@#\\/%=~_ |$?!:,.]*\\)|[" +
+            "A-Z0-9+&@#\\/%=~_ |$]))")]
+        public string RegExPatternFirstForLinks {
+            get {
+                return ((string)(this["RegExPatternFirstForLinks"]));
+            }
+        }
     }
 }
