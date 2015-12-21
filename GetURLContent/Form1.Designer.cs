@@ -32,14 +32,16 @@
             this.tbExtractResultURLs = new System.Windows.Forms.TextBox();
             this.tbSourceURLs = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnGetURLsLink = new System.Windows.Forms.Button();
+            this.tbSourceURL = new System.Windows.Forms.TextBox();
+            this.radioButtonImagezilla = new System.Windows.Forms.RadioButton();
+            this.radioButtonGallerysense = new System.Windows.Forms.RadioButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.radioButtonGallerysense = new System.Windows.Forms.RadioButton();
-            this.radioButtonImagezilla = new System.Windows.Forms.RadioButton();
-            this.tbSourceURL = new System.Windows.Forms.TextBox();
-            this.btnGetURLsLink = new System.Windows.Forms.Button();
+            this.toolStripStatusLabelErrorFlag = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStart
@@ -65,7 +67,7 @@
             // tbSourceURLs
             // 
             this.tbSourceURLs.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tbSourceURLs.Location = new System.Drawing.Point(3, 61);
+            this.tbSourceURLs.Location = new System.Drawing.Point(0, 61);
             this.tbSourceURLs.Multiline = true;
             this.tbSourceURLs.Name = "tbSourceURLs";
             this.tbSourceURLs.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -80,35 +82,37 @@
             this.panel1.Controls.Add(this.radioButtonGallerysense);
             this.panel1.Controls.Add(this.btnStart);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(737, 61);
+            this.panel1.Size = new System.Drawing.Size(740, 61);
             this.panel1.TabIndex = 5;
             // 
-            // splitter1
+            // btnGetURLsLink
             // 
-            this.splitter1.Location = new System.Drawing.Point(0, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 604);
-            this.splitter1.TabIndex = 6;
-            this.splitter1.TabStop = false;
+            this.btnGetURLsLink.Location = new System.Drawing.Point(617, 30);
+            this.btnGetURLsLink.Name = "btnGetURLsLink";
+            this.btnGetURLsLink.Size = new System.Drawing.Size(120, 23);
+            this.btnGetURLsLink.TabIndex = 5;
+            this.btnGetURLsLink.Text = "Get URLs link";
+            this.btnGetURLsLink.UseVisualStyleBackColor = true;
+            this.btnGetURLsLink.Click += new System.EventHandler(this.btnGetURLsLink_Click);
             // 
-            // statusStrip1
+            // tbSourceURL
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(3, 582);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(737, 22);
-            this.statusStrip1.TabIndex = 7;
-            this.statusStrip1.Text = "statusStrip1";
+            this.tbSourceURL.Location = new System.Drawing.Point(0, 32);
+            this.tbSourceURL.Name = "tbSourceURL";
+            this.tbSourceURL.Size = new System.Drawing.Size(611, 20);
+            this.tbSourceURL.TabIndex = 4;
             // 
-            // progressBar1
+            // radioButtonImagezilla
             // 
-            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar1.Location = new System.Drawing.Point(3, 559);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(737, 23);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 8;
+            this.radioButtonImagezilla.AutoSize = true;
+            this.radioButtonImagezilla.Location = new System.Drawing.Point(110, 9);
+            this.radioButtonImagezilla.Name = "radioButtonImagezilla";
+            this.radioButtonImagezilla.Size = new System.Drawing.Size(88, 17);
+            this.radioButtonImagezilla.TabIndex = 3;
+            this.radioButtonImagezilla.Text = "imagezilla.net";
+            this.radioButtonImagezilla.UseVisualStyleBackColor = true;
             // 
             // radioButtonGallerysense
             // 
@@ -122,32 +126,44 @@
             this.radioButtonGallerysense.Text = "gallerysense.se";
             this.radioButtonGallerysense.UseVisualStyleBackColor = true;
             // 
-            // radioButtonImagezilla
+            // splitter1
             // 
-            this.radioButtonImagezilla.AutoSize = true;
-            this.radioButtonImagezilla.Location = new System.Drawing.Point(110, 9);
-            this.radioButtonImagezilla.Name = "radioButtonImagezilla";
-            this.radioButtonImagezilla.Size = new System.Drawing.Size(88, 17);
-            this.radioButtonImagezilla.TabIndex = 3;
-            this.radioButtonImagezilla.Text = "imagezilla.net";
-            this.radioButtonImagezilla.UseVisualStyleBackColor = true;
+            this.splitter1.Location = new System.Drawing.Point(409, 61);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 498);
+            this.splitter1.TabIndex = 6;
+            this.splitter1.TabStop = false;
             // 
-            // tbSourceURL
+            // statusStrip1
             // 
-            this.tbSourceURL.Location = new System.Drawing.Point(0, 32);
-            this.tbSourceURL.Name = "tbSourceURL";
-            this.tbSourceURL.Size = new System.Drawing.Size(611, 20);
-            this.tbSourceURL.TabIndex = 4;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabelErrorFlag});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 582);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(740, 22);
+            this.statusStrip1.TabIndex = 7;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // btnGetURLsLink
+            // progressBar1
             // 
-            this.btnGetURLsLink.Location = new System.Drawing.Point(617, 30);
-            this.btnGetURLsLink.Name = "btnGetURLsLink";
-            this.btnGetURLsLink.Size = new System.Drawing.Size(120, 23);
-            this.btnGetURLsLink.TabIndex = 5;
-            this.btnGetURLsLink.Text = "Get URLs link";
-            this.btnGetURLsLink.UseVisualStyleBackColor = true;
-            this.btnGetURLsLink.Click += new System.EventHandler(this.btnGetURLsLink_Click);
+            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.progressBar1.Location = new System.Drawing.Point(0, 559);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(740, 23);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 8;
+            // 
+            // toolStripStatusLabelErrorFlag
+            // 
+            this.toolStripStatusLabelErrorFlag.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.toolStripStatusLabelErrorFlag.ForeColor = System.Drawing.Color.Red;
+            this.toolStripStatusLabelErrorFlag.IsLink = true;
+            this.toolStripStatusLabelErrorFlag.LinkColor = System.Drawing.Color.Red;
+            this.toolStripStatusLabelErrorFlag.Name = "toolStripStatusLabelErrorFlag";
+            this.toolStripStatusLabelErrorFlag.Size = new System.Drawing.Size(50, 17);
+            this.toolStripStatusLabelErrorFlag.Text = "Error List";
+            this.toolStripStatusLabelErrorFlag.Visible = false;
+            this.toolStripStatusLabelErrorFlag.Click += new System.EventHandler(this.toolStripStatusLabelErrorFlag_Click);
             // 
             // Form1
             // 
@@ -155,16 +171,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(740, 604);
             this.Controls.Add(this.tbExtractResultURLs);
+            this.Controls.Add(this.splitter1);
             this.Controls.Add(this.tbSourceURLs);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.splitter1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Get URL Content v0.0.5  b21.12.15";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,6 +200,7 @@
         private System.Windows.Forms.RadioButton radioButtonGallerysense;
         private System.Windows.Forms.Button btnGetURLsLink;
         private System.Windows.Forms.TextBox tbSourceURL;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelErrorFlag;
     }
 }
 

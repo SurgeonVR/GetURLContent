@@ -17,6 +17,7 @@ namespace GetURLContent
     public partial class Form1 : Form
     {
         public String[] GlobalArray;
+        public String[] ErrorArrayList;
         public Form1()
         {
             InitializeComponent();            
@@ -91,16 +92,25 @@ namespace GetURLContent
             this.progressBar1.Maximum = this.tbSourceURLs.Lines.Count();
             this.progressBar1.Value = 0;
             this.tbExtractResultURLs.Clear();
+            this.toolStripStatusLabelErrorFlag.Visible = false;
 
             String[] my_array = new String[this.tbSourceURLs.Lines.Count()];
             List<string> ContentList = new List<string>();
+            List<string> ErrorList = new List<string>();
+            string content = string.Empty;
 
 
 
             my_array = this.tbSourceURLs.Lines.ToArray();
             foreach (string s in my_array)
             {
-                string content = client.DownloadString(s);
+                try { content = client.DownloadString(s); }
+                catch
+                {
+                    ErrorList.Add(s);
+                    this.toolStripStatusLabelErrorFlag.Visible = true;
+                }
+                finally { this.ErrorArrayList = ErrorList.ToArray(); }
                 //this.tbContent.Text = content;
                 Regex MyRegexFirst = new Regex(this.radioButtonGallerysense.Checked ? Properties.Settings.Default.RegExPatternFirst : Properties.Settings.Default.RegExPatternFirstImagezilla, RegexOptions.IgnoreCase);
                 Match match = MyRegexFirst.Match(content);
@@ -108,6 +118,7 @@ namespace GetURLContent
                 Match match1 = MyRegexSecond.Match(match.ToString());
                 this.tbExtractResultURLs.AppendText(match1.Value + Environment.NewLine);
                 ContentList.Add(match1.Value);
+                content = string.Empty;
                 this.progressBar1.Value = this.progressBar1.Value + 1;
             }
             //GlobalArray = ContentList.ToArray();
@@ -167,6 +178,12 @@ namespace GetURLContent
                 this.tbSourceURLs.Lines = (FU.getUrlLinkArray());
             }
 
+        }
+
+        private void toolStripStatusLabelErrorFlag_Click(object sender, EventArgs e)
+        {
+            FormErrorList ER = new FormErrorList(this.ErrorArrayList);
+            ER.Show();
         }
     }
 }
