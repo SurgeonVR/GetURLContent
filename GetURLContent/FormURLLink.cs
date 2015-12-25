@@ -15,11 +15,14 @@ namespace GetURLContent
     {
         private string vURL;
         private String[] URLLinkArray ;
+        private Form1.SiteType pSiteType;
 
-        public FormURLLink(string URLInput)
+        public FormURLLink(string URLInput, Form1.SiteType vSiteType )
         {
             InitializeComponent();
             this.vURL = URLInput;
+            this.toolStripStatusLabelCurrentURL.Text = URLInput;
+            this.pSiteType = vSiteType;
             this.GetAllURLs();
             
         }
@@ -30,7 +33,7 @@ namespace GetURLContent
             System.Net.WebClient client = new System.Net.WebClient();
             string content = client.DownloadString(this.vURL);
 
-            Regex MyRegexFirst = new Regex(Properties.Settings.Default.RegExPatternFirstForLinks, RegexOptions.IgnoreCase);
+            Regex MyRegexFirst = new Regex(pSiteType == Form1.SiteType.ImageZilla ? Properties.Settings.Default.RegExPatternFirstForLinks : Properties.Settings.Default.RegExPatternFirstForLinksGallerySense, RegexOptions.IgnoreCase);
             foreach (Match match in MyRegexFirst.Matches(content))
             {
 
@@ -104,6 +107,21 @@ namespace GetURLContent
         public string[] getUrlLinkArray()
         {
             return this.URLLinkArray;
+        }
+
+        public string getURLOper()
+        {
+            return this.vURL;
+        }
+
+        private void toolStripButtonSelectJPG_Click(object sender, EventArgs e)
+        {
+           for (int i = 0; i < listBox1.Items.Count; i++)
+            {
+                if (  (listBox1.Items[i].ToString().ToUpper()).Contains("JPG") )
+                { this.listBox1.SelectedIndex = i; }
+            }
+
         }
     }
 }

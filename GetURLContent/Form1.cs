@@ -93,6 +93,7 @@ namespace GetURLContent
             this.progressBar1.Value = 0;
             this.tbExtractResultURLs.Clear();
             this.toolStripStatusLabelErrorFlag.Visible = false;
+            this.label2.Text = this.label1.Text;
 
             String[] my_array = new String[this.tbSourceURLs.Lines.Count()];
             List<string> ContentList = new List<string>();
@@ -166,7 +167,7 @@ namespace GetURLContent
 
         private void btnGetURLsLink_Click(object sender, EventArgs e)
         {
-            FormURLLink FU = new FormURLLink(this.tbSourceURL.Text);
+            FormURLLink FU = new FormURLLink(this.tbSourceURL.Text,this.radioButtonGallerysense.Checked ? SiteType.GallerySense : SiteType.ImageZilla);
 
             FU.Activate();
 
@@ -176,6 +177,7 @@ namespace GetURLContent
             {
                 this.tbSourceURLs.Clear();
                 this.tbSourceURLs.Lines = (FU.getUrlLinkArray());
+                this.label1.Text = FU.getURLOper();
             }
 
         }
@@ -184,6 +186,13 @@ namespace GetURLContent
         {
             FormErrorList ER = new FormErrorList(this.ErrorArrayList);
             ER.Show();
+        }
+
+
+        public enum SiteType : int
+        {
+            GallerySense = 1,
+            ImageZilla = 2
         }
     }
 }

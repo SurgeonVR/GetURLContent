@@ -66,5 +66,16 @@ namespace GetURLContent.Properties {
                 return ((string)(this["RegExPatternFirstForLinks"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("href=\'(\\b(?:(?:https?|ftp|file|[A-Za-z]+):\\/\\/|www\\.|ftp\\.)(?:\\([-A-Z0-9+&@#\\/%=~" +
+            "_ |$?!:,.]*\\)|[-A-Z0-9+&@#\\/%=~_ |$?!:,.])*(?:\\([-A-Z0-9+&@#\\/%=~_ |$?!:,.]*\\)|[" +
+            "A-Z0-9+&@#\\/%=~_ |$]))")]
+        public string RegExPatternFirstForLinksGallerySense {
+            get {
+                return ((string)(this["RegExPatternFirstForLinksGallerySense"]));
+            }
+        }
     }
 }

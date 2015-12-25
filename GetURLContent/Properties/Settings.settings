@@ -14,5 +14,8 @@
     <Setting Name="RegExPatternFirstForLinks" Type="System.String" Scope="Application">
       <Value Profile="(Default)">href="(\b(?:(?:https?|ftp|file|[A-Za-z]+):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&amp;@#\/%=~_ |$?!:,.]*\)|[-A-Z0-9+&amp;@#\/%=~_ |$?!:,.])*(?:\([-A-Z0-9+&amp;@#\/%=~_ |$?!:,.]*\)|[A-Z0-9+&amp;@#\/%=~_ |$]))</Value>
     </Setting>
+    <Setting Name="RegExPatternFirstForLinksGallerySense" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">href='(\b(?:(?:https?|ftp|file|[A-Za-z]+):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&amp;@#\/%=~_ |$?!:,.]*\)|[-A-Z0-9+&amp;@#\/%=~_ |$?!:,.])*(?:\([-A-Z0-9+&amp;@#\/%=~_ |$?!:,.]*\)|[A-Z0-9+&amp;@#\/%=~_ |$]))</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
