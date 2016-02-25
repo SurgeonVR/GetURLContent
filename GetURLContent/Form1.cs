@@ -47,14 +47,23 @@ namespace GetURLContent
 
         public Form1()
         {
+            Control.CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
             TransferTextResult.TextChanged += TransferTextResult_TextChanged;
             TransferTextSource.TextChanged += TransferTextSource_TextChanged;
             ClearTextSource.TextChanged += ClearTextSource_TextChanged;
             ActiveTaskCount.TextChanged += ActiveTaskCount_TextChanged;
-            Control.CheckForIllegalCrossThreadCalls = false;
-            CountOfTask = int.Parse(tbCountOfTask.Text); 
+            //Control.CheckForIllegalCrossThreadCalls = false;
+            CountOfTask = int.Parse(tbCountOfTask.Text);
+            UseSourceList = false;
+            UseVerbose = false;
         }
+
+        // Use URL list tbSourceURLs as source for looping end extracting target URL 
+        public static bool UseSourceList { get; set; }
+
+        // Use verbose in Source URL and Etracted URL
+        public static bool UseVerbose { get; set; }
 
         // Print count of active task
         private void ActiveTaskCount_TextChanged(object sender, EventArgs e)
@@ -71,13 +80,13 @@ namespace GetURLContent
         // task mode, output source url 
         private void TransferTextSource_TextChanged(object sender, EventArgs e)
         {
-          if (chbVerboseTask.Checked) this.tbSourceURLs.AppendText(TransferTextSource.Text + System.Environment.NewLine);
+          if (UseVerbose) this.tbSourceURLs.AppendText(TransferTextSource.Text + System.Environment.NewLine);
         }
 
         // task mode, output extracted url 
         private void TransferTextResult_TextChanged(object sender, EventArgs e)
         {
-          if (chbVerboseTask.Checked)  this.tbExtractResultURLs.AppendText(TransferTextResult.Text + System.Environment.NewLine)  ;
+          if (UseVerbose)  this.tbExtractResultURLs.AppendText(TransferTextResult.Text + System.Environment.NewLine)  ;
         }
 
 
@@ -645,7 +654,8 @@ namespace GetURLContent
                 String[] my_array;
 
                
-                if (((TextBox)TUrlCollection[0]).Lines.Count() == 0) // генерячу рандомні урли щоб не набивать їх в текстове поле якщо tbSourceURLs пустий
+                //if (((TextBox)TUrlCollection[0]).Lines.Count() == 0 ) 
+                if (!UseSourceList) // генерячу рандомні урли щоб не набивать їх в текстове поле якщо tbSourceURLs пустий
                 {
                     UL = new URLList(int.Parse(((TextBox)TUrlCollection[6]).Text), ((TextBox)TUrlCollection[2]).Text, ((TextBox)TUrlCollection[3]).Text);
                     my_array = UL.GetRandomURLs(int.Parse(((TextBox)TUrlCollection[4]).Text), int.Parse(((TextBox)TUrlCollection[5]).Text), ((CheckBox)TUrlCollection[7]).Checked); //  генерячу рандомні урли щоб не набивать їх в текстове поле
@@ -716,6 +726,7 @@ namespace GetURLContent
 
             }
 
+
             public static object CloneObject(object obj)
             {
                 if (obj == null) return null;
@@ -734,11 +745,9 @@ namespace GetURLContent
                 return ret;
             }
 
-
-
-
-
         }
+
+
 
         public class URLContentTask
         {
@@ -824,6 +833,18 @@ namespace GetURLContent
             PauseOnDemand = !PauseOnDemand;
             //btnPauseAllTask.FlatStyle = PauseOnDemand ? FlatStyle.Flat  : FlatStyle.Standard;
             btnPauseAllTask.ForeColor = PauseOnDemand ? Color.Red : SystemColors.ControlText;
+        }
+
+        // 25.02.16
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            UseSourceList = ((CheckBox)sender).Checked ? true : false; 
+        }
+
+        // 25.02.16
+        private void chbUseSourceURLList_CheckedChanged(object sender, EventArgs e)
+        {
+            UseVerbose = ((CheckBox)sender).Checked ? true : false;
         }
     }
 }

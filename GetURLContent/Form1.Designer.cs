@@ -68,6 +68,8 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chbUseSourceURLList = new System.Windows.Forms.CheckBox();
+            this.btnPauseAllTask = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.btnStartEx = new System.Windows.Forms.Button();
             this.btnStopAllTask = new System.Windows.Forms.Button();
@@ -82,8 +84,7 @@
             this.tbDirectoryStart = new System.Windows.Forms.TextBox();
             this.btnSelectFolder = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.btnPauseAllTask = new System.Windows.Forms.Button();
-            this.chbVerboseTask = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -488,7 +489,8 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.chbVerboseTask);
+            this.groupBox3.Controls.Add(this.checkBox1);
+            this.groupBox3.Controls.Add(this.chbUseSourceURLList);
             this.groupBox3.Controls.Add(this.btnPauseAllTask);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.btnStartEx);
@@ -500,6 +502,28 @@
             this.groupBox3.Size = new System.Drawing.Size(899, 100);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
+            // 
+            // chbUseSourceURLList
+            // 
+            this.chbUseSourceURLList.AutoSize = true;
+            this.chbUseSourceURLList.Location = new System.Drawing.Point(6, 48);
+            this.chbUseSourceURLList.Name = "chbUseSourceURLList";
+            this.chbUseSourceURLList.Size = new System.Drawing.Size(65, 17);
+            this.chbUseSourceURLList.TabIndex = 6;
+            this.chbUseSourceURLList.Text = "Verbose";
+            this.chbUseSourceURLList.UseVisualStyleBackColor = true;
+            this.chbUseSourceURLList.CheckedChanged += new System.EventHandler(this.chbUseSourceURLList_CheckedChanged);
+            // 
+            // btnPauseAllTask
+            // 
+            this.btnPauseAllTask.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnPauseAllTask.Location = new System.Drawing.Point(132, 71);
+            this.btnPauseAllTask.Name = "btnPauseAllTask";
+            this.btnPauseAllTask.Size = new System.Drawing.Size(75, 23);
+            this.btnPauseAllTask.TabIndex = 5;
+            this.btnPauseAllTask.Text = "PauseAll";
+            this.btnPauseAllTask.UseVisualStyleBackColor = true;
+            this.btnPauseAllTask.Click += new System.EventHandler(this.btnPauseAllTask_Click);
             // 
             // label9
             // 
@@ -633,26 +657,16 @@
             // 
             this.folderBrowserDialog1.ShowNewFolderButton = false;
             // 
-            // btnPauseAllTask
+            // checkBox1
             // 
-            this.btnPauseAllTask.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnPauseAllTask.Location = new System.Drawing.Point(132, 71);
-            this.btnPauseAllTask.Name = "btnPauseAllTask";
-            this.btnPauseAllTask.Size = new System.Drawing.Size(75, 23);
-            this.btnPauseAllTask.TabIndex = 5;
-            this.btnPauseAllTask.Text = "PauseAll";
-            this.btnPauseAllTask.UseVisualStyleBackColor = true;
-            this.btnPauseAllTask.Click += new System.EventHandler(this.btnPauseAllTask_Click);
-            // 
-            // chbVerboseTask
-            // 
-            this.chbVerboseTask.AutoSize = true;
-            this.chbVerboseTask.Location = new System.Drawing.Point(6, 48);
-            this.chbVerboseTask.Name = "chbVerboseTask";
-            this.chbVerboseTask.Size = new System.Drawing.Size(65, 17);
-            this.chbVerboseTask.TabIndex = 6;
-            this.chbVerboseTask.Text = "Verbose";
-            this.chbVerboseTask.UseVisualStyleBackColor = true;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(77, 48);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(126, 17);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "Use Source URL List";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // Form1
             // 
@@ -750,7 +764,8 @@
         private System.Windows.Forms.Button btnStopAllTask;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnPauseAllTask;
-        private System.Windows.Forms.CheckBox chbVerboseTask;
+        private System.Windows.Forms.CheckBox chbUseSourceURLList;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
