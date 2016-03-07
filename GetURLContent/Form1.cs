@@ -158,7 +158,7 @@ namespace GetURLContent
         }
 
 
-
+        #region Single Mode Extract URL from tbSourceURLs OR  Download Files From tbExtractResultURLs
 
         // Operations for single thread mode
         private void MainApp()
@@ -189,7 +189,8 @@ namespace GetURLContent
                 }
                 finally { this.ErrorArrayList = ErrorList.ToArray(); }
 
-                Regex MyRegexFirst = new Regex(this.radioButtonGallerysense.Checked ? Properties.Settings.Default.RegExPatternFirst : Properties.Settings.Default.RegExPatternFirstImagezilla, RegexOptions.IgnoreCase);
+                //Regex MyRegexFirst = new Regex(this.radioButtonGallerysense.Checked ? Properties.Settings.Default.RegExPatternFirst : Properties.Settings.Default.RegExPatternFirstImagezilla, RegexOptions.IgnoreCase);
+                Regex MyRegexFirst = new Regex( (GetSiteType == SiteType.GallerySense || GetSiteType == SiteType.GalleryNova) ? Properties.Settings.Default.RegExPatternFirst : Properties.Settings.Default.RegExPatternFirstImagezilla, RegexOptions.IgnoreCase);
                 Match match = MyRegexFirst.Match(content);
                 Regex MyRegexSecond = new Regex(Properties.Settings.Default.RegexPatternSecond, RegexOptions.IgnoreCase);
                 Match match1 = MyRegexSecond.Match(match.ToString());
@@ -217,6 +218,39 @@ namespace GetURLContent
             //GlobalArray = ContentList.ToArray();
             //this.textBox1.Lines = ContentList.ToArray();
         }
+
+        // Downloads file for single thread mode
+        private void MainAppDownload()
+        {
+            System.Net.WebClient client = new System.Net.WebClient();
+
+            this.progressBar1.Maximum = this.tbExtractResultURLs.Lines.Count();
+            this.progressBar1.Value = 0;
+            this.toolStripStatusLabelErrorFlag.Visible = false;
+
+            String[] my_array = new String[this.tbExtractResultURLs.Lines.Count()];
+            List<string> ErrorList = new List<string>();
+
+            my_array = this.tbExtractResultURLs.Lines.ToArray();
+            foreach (string s in my_array)
+            {
+                try {
+
+                     client.DownloadFile(s, tbTargetDownloadFolder.Text +@"\"+System.IO.Path.GetFileName(s));
+                     }
+                catch (Exception e)
+                {
+                    ErrorList.Add(s +" --> " + e.Message);
+                    this.toolStripStatusLabelErrorFlag.Visible = true;
+                }
+                finally { this.ErrorArrayList = ErrorList.ToArray(); }
+                this.progressBar1.Value = this.progressBar1.Value + 1;
+            }
+        }
+
+        #endregion Single
+
+
 
         public static void MainAppTask(object UrlCollection)
         {
@@ -419,9 +453,15 @@ namespace GetURLContent
         public enum SiteType : int
         {
             GallerySense = 1,
-            ImageZilla = 2
+            ImageZilla = 2,
+            GalleryNova = 3
         }
 
+        public SiteType GetSiteType // for downloads single
+        { get { return radioButtonGallerysense.Checked ? SiteType.GallerySense : radioButtonImagezilla.Checked ? SiteType.ImageZilla : SiteType.GalleryNova; } }
+
+        public SiteType GetSiteTypeD // for downloadsMulti
+        { get { return radioButtonGallerysenseD.Checked ? SiteType.GallerySense : radioButtonImagezillaD.Checked ? SiteType.ImageZilla : SiteType.GalleryNova; } }
         // генерить випадкові урли з діапазону доступних
         public class URLList
         {
@@ -468,11 +508,16 @@ namespace GetURLContent
 
         private DataSet GetDBMainData(SQLiteConnection cn)
         {
+            string SQLTextFirst = "select * from UrlList ";
+            string SQLTextMiidle = " Where SourceSiteTypeID = " + (int) GetSiteTypeD ;  
+            string SQLTextMiidle_01 = (chbIsDownloaded.Checked ? " And DownloadState = 1 " : chbIsNotDownloaded.Checked ? " And DownloadState = 0 " : string.Empty);
+            string SQLTextMiidle_02 = chbIsAllData.Checked ?  string.Empty : (tbFromURL.Text != string.Empty ? tbToURL.Text != string.Empty ? " And SourceSiteId between " + tbFromURL.Text + " and " + tbToURL.Text + " " : string.Empty : string.Empty);
+            string SQLTextLast = chbIsAllData.Checked ? tbLimitSelectedRows.Text == "0" ? string.Empty : " Limit " + tbLimitSelectedRows.Text : tbLimitSelectedRows.Text != "0" ? " Limit " + tbLimitSelectedRows.Text : string.Empty;
 
             DataSet dt = new DataSet();
             dt.Reset();
             SQLiteCommand cmd = new SQLiteCommand();
-            cmd.CommandText = "select * from UrlList";
+            cmd.CommandText = SQLTextFirst + SQLTextMiidle + SQLTextMiidle_01 + SQLTextMiidle_02 + SQLTextLast;
             cmd.Connection = cn;
             SQLiteDataAdapter ad = new SQLiteDataAdapter(cmd);
 
@@ -508,8 +553,8 @@ namespace GetURLContent
                 SQLiteConnection cn = EstablistSQLiteConnection();
                 SQLiteCommand cmd = new SQLiteCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = @"INSERT INTO UrlList(SourceSiteID,SourceSiteTypeID,SourceURL,ExtractedURL,ExtractedURLFileName) 
-                                            VALUES (@SourceSiteID,@SourceSiteTypeID,@SourceURL,@ExtractedURL,@ExtractedURLFileName);";
+                cmd.CommandText = @"INSERT INTO UrlList(SourceSiteID,SourceSiteTypeID,SourceURL,ExtractedURL,ExtractedURLError,ExtractedURLFileName) 
+                                            VALUES (@SourceSiteID,@SourceSiteTypeID,@SourceURL,@ExtractedURL,@ExtractedURLError,@ExtractedURLFileName);";
                 //cmd.Parameters.AddWithValue("@first_name", "Sergey");
                 //cmd.Parameters.Add(new SQLiteParameter("@last_name", "Petrov"));
                 //SQLiteParameter param = new SQLiteParameter("@sex", DbType.Int32);
@@ -529,7 +574,41 @@ namespace GetURLContent
                 cn.Dispose();
             }
 
+            public void UpdateDownloadedFile(string[] URLdata)
+            {
+                SQLiteConnection cn = EstablistSQLiteConnection();
+                SQLiteCommand cmd = new SQLiteCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = @"Update UrlList set DownloadState = 1, DownloadStateDate = datetime('now','localtime'), DownloadStateErrorText = @DownloadStateErrorText where Id = @Id";
+                //cmd.CommandText = @"Update UrlList set DownloadState = 1, DownloadStateDate = datetime('now','localtime') where Id = @Id";
 
+
+                //cmd.Parameters.AddWithValue("@first_name", "Sergey");
+                //cmd.Parameters.Add(new SQLiteParameter("@last_name", "Petrov"));
+                //SQLiteParameter param = new SQLiteParameter("@sex", DbType.Int32);
+                //param.Value = 0;
+                //cmd.Parameters.Add(param);
+                //cmd.Parameters.Add("@birth_date", DbType.DateTime).Value = DateTime.Parse("2000-01-15");
+
+
+
+                //cmd.Parameters.Add("@DownloadStateDate", DbType.DateTime).Value = DateTime.Now;
+                cmd.Parameters.AddWithValue("@Id", URLdata[0].ToString());
+                cmd.Parameters.AddWithValue("@DownloadStateErrorText", URLdata[1].ToString());
+
+
+
+
+
+
+
+
+
+                cmd.ExecuteNonQuery();
+
+                cn.Close();
+                cn.Dispose();
+            }
             public SQLiteConnection EstablistSQLiteConnection()
             {
                 string RelPath = String.Empty;
@@ -611,6 +690,7 @@ namespace GetURLContent
             }
         }
 
+        #region ---------------------- Task Mode Extract URL random gen or tbSourceURLs OR  Download Files From tbExtractResultURLs or from Database
         private void btnStartTask_Click(object sender, EventArgs e)
         {
             //Thread t = new Thread(new ParameterizedThreadStart(MainAppTask));
@@ -619,7 +699,7 @@ namespace GetURLContent
             //Task task1 = new Task(() => GetURLContentTask(my_par));
             ExitOnDemand = false;
             PauseOnDemand = false;
-            Object[] my_par = new Object[8];
+            Object[] my_par = new Object[9];
             MultiT GT = new MultiT();
             Task task1 = new Task(delegate { GT.MainAppTaskCL(my_par); });
             //Task task1 = new Task(new Action(GT.MainAppTaskCL));
@@ -632,6 +712,7 @@ namespace GetURLContent
             my_par[5] = tbNumberOfEndUrl;
             my_par[6] = tbCountOfRandomUrls;
             my_par[7] = checkBoxIsRandomGen;
+            my_par[8] = GetSiteType;
 
             task1.Start();
         }
@@ -679,6 +760,8 @@ namespace GetURLContent
 
                         my_par[0] = s;
                         my_par[1] = task1;
+                        my_par[2] = TUrlCollection[8];
+
 
                         lock (GlobalTaskListLocker) { GlobalTaskList.Add(task1);}
                         Debug.WriteLine(string.Format("Added(M) In TaskList Id {0},Url {1}", task1.Id.ToString(), s));
@@ -703,6 +786,7 @@ namespace GetURLContent
 
                         my_par[0] = s;
                         my_par[1] = task1;
+                        my_par[2] = TUrlCollection[8];
 
                         lock (GlobalTaskListLocker) { GlobalTaskList.Add(task1); }
                         Debug.WriteLine(string.Format("Added(E) In TaskList Id {0},Url {1}", task1.Id.ToString(), s));
@@ -747,8 +831,6 @@ namespace GetURLContent
 
         }
 
-
-
         public class URLContentTask
         {
             object[] vURLAddress;
@@ -784,11 +866,169 @@ namespace GetURLContent
                 lock (TransferTextResultLocker) { TransferTextResult.Text = match1.Value; }
                 lock (TransferTextSourceLocker) { TransferTextSource.Text = intURL; }
                 DBOperations db = new DBOperations();
-                db.InsertNewURLData(new string[] { System.IO.Path.GetFileName(intURL), "1", intURL, match1.Value, ErrFlag.ToString(), System.IO.Path.GetFileName(match1.Value) });
+                db.InsertNewURLData(new string[] { System.IO.Path.GetFileName(intURL), ( ((int) (SiteType)vURLAddress[2])).ToString() , intURL, match1.Value, ErrFlag.ToString(), System.IO.Path.GetFileName(match1.Value) });
 
             }
 
         }
+
+        private void btnStartDownloadTask_Click(object sender, EventArgs e)
+        {
+            DBOperations db = new DBOperations();
+            DataSet ds = new DataSet();
+            SQLiteConnection cn = db.EstablistSQLiteConnection();
+            ds = GetDBMainData(cn);
+
+            if (ds.Tables["UrlList"].Rows.Count == 0) return;
+
+            //Thread t = new Thread(new ParameterizedThreadStart(MainAppTask));
+            //t.Start(this.tbSourceURLs);
+
+            //Task task1 = new Task(() => GetURLContentTask(my_par));
+            ExitOnDemand = false;
+            PauseOnDemand = false;
+            Object[] my_par = new Object[3];
+            MultiTFileDownload GT = new MultiTFileDownload();
+            Task task1 = new Task(delegate { GT.MainAppTaskCL(my_par); });
+            //Task task1 = new Task(new Action(GT.MainAppTaskCL));
+
+            my_par[0] = ds;
+            my_par[1] = tbTargetDownloadFolder;
+            my_par[2] = GetSiteTypeD;
+
+            task1.Start();
+        }
+
+
+        public class MultiTFileDownload
+        {
+            private object[] Params;
+            DataSet ds;
+
+            public void MainAppTaskCL(object[] Params)
+            {
+                this.Params = Params;
+                ds = (DataSet)Params[0];
+
+                lock (GlobalTaskListLocker) { GlobalTaskList.Clear(); }
+
+
+                foreach (DataRow  s in ds.Tables["UrlList"].Rows)
+                {
+
+                    if (GlobalTaskList.Count() <= CountOfTask)
+                    {
+                        Object[] my_par = new Object[4];
+                        //Task task1 = new Task(() => GetURLContentTask(my_par));
+                        //Task task1 = new Task(delegate { GetURLContentTask(my_par); });
+                        //Task task1 = new Task(new Action(FT.GetURLContentTaskT));
+                        URLDownloadFileTask FT = new URLDownloadFileTask(my_par);
+                        Task task1 = new Task(delegate { FT.DownloadFile(); });
+                        //Task task1 =  Task.Factory.StartNew(delegate { PrepareRunTask(my_par); });
+
+
+                        my_par[0] = s;
+                        my_par[1] = task1;
+                        my_par[2] = Params[1];
+                        my_par[3] = Params[2];
+
+
+
+                        lock (GlobalTaskListLocker) { GlobalTaskList.Add(task1); }
+                        Debug.WriteLine(string.Format("Added(M) In TaskList Id {0},Url {1}", task1.Id.ToString(), s));
+                        task1.Start();
+                        Debug.WriteLine(string.Format("Start(M) Task Id {0},Url {1}", task1.Id.ToString(), s));
+                    }
+                    else
+                    {
+                        do
+                        {
+                            Thread.Sleep(10);
+                        } while (GlobalTaskList.Count() > CountOfTask);
+
+                        Object[] my_par = new Object[4];
+                        //Task task1 = new Task(() => GetURLContentTask(my_par));
+                        //Task task1 = new Task(delegate { GetURLContentTask(my_par); });
+                        //Task task1 = new Task(new Action(FT.GetURLContentTaskT));
+                        URLDownloadFileTask FT = new URLDownloadFileTask(my_par);
+                        Task task1 = new Task(delegate { FT.DownloadFile(); });
+                        //Task task1 =  Task.Factory.StartNew(delegate { PrepareRunTask(my_par); });
+
+
+                        my_par[0] = s;
+                        my_par[1] = task1;
+                        my_par[2] = Params[1];
+                        my_par[3] = Params[2];
+
+                        lock (GlobalTaskListLocker) { GlobalTaskList.Add(task1); }
+                        Debug.WriteLine(string.Format("Added(E) In TaskList Id {0},Url {1}", task1.Id.ToString(), s));
+                        task1.Start();
+                        Debug.WriteLine(string.Format("Start(E) Task Id {0},Url {1}", task1.Id.ToString(), s));
+
+                    }
+
+                    // Begin Service code
+                    if (ExitOnDemand) break; // exit when user press btn "StopAll"
+
+                    // do void cycles where user press btn Pause, it make pause all of tasks that not started yet  
+                    while (PauseOnDemand)
+                    {
+                        Thread.Sleep(500);
+                    }
+                    // End service Code
+                }
+            }
+        }
+
+        public class URLDownloadFileTask
+        {
+            object[] Params;
+            public URLDownloadFileTask(object[] Params)
+            {
+                this.Params = Params;
+            }
+            public void DownloadFile()
+            {
+                string err = string.Empty;
+                string TargetURL = ((DataRow)Params[0]).ItemArray.GetValue(4).ToString();
+                string IdTargetURL = ((DataRow)Params[0]).ItemArray.GetValue(0).ToString();
+                string TargetFolder = ((TextBox)Params[2]).Text + @"\" + System.IO.Path.GetFileName(TargetURL);
+                System.Net.WebClient client = new System.Net.WebClient();
+                int ErrFlag = 0;
+                string content = string.Empty;
+
+                try
+                {
+                    client.DownloadFile(TargetURL, TargetFolder);
+                }
+                catch (Exception e)
+                {
+                    err = e.Message;
+                    ErrFlag = 1;
+                }
+                
+                lock (GlobalTaskListLocker)
+                {
+                    Debug.WriteLine(string.Format("End Task Id {0},Source URL {1},Founded Url {2}", ((Task)Params[1]).Id.ToString(), "intURL", "match1.Value"));
+                    GlobalTaskList.Remove((Task)Params[1]);
+                    Debug.WriteLine(string.Format("GlobalTaskList Containts Task Id {0}, {1}", ((Task)Params[1]).Id.ToString(), GlobalTaskList.Contains((Task)Params[1]) ? "True" : "false"));
+                };
+                lock (ActiveTaskCountLocker) { ActiveTaskCount.Text = GlobalTaskList.Count().ToString(); }
+                DBOperations db = new DBOperations();
+                db.UpdateDownloadedFile(new string[] { IdTargetURL, ErrFlag == 1 ? err : string.Empty });
+
+            }
+
+        }
+
+
+
+
+
+
+        #endregion
+
+
 
         private void btnSelectFolder_Click(object sender, EventArgs e)
         {
@@ -846,5 +1086,19 @@ namespace GetURLContent
         {
             UseVerbose = ((CheckBox)sender).Checked ? true : false;
         }
+
+        //06.03.16 set the target download folder
+        private void btnSelectTargetFolder_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            { tbTargetDownloadFolder.Text = folderBrowserDialog1.SelectedPath; }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MainAppDownload();
+        }
+
+
     }
 }

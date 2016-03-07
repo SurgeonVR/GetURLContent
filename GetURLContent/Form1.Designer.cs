@@ -46,6 +46,7 @@
             this.tbNumberOfBeginUrl = new System.Windows.Forms.TextBox();
             this.tbEndOfUrl = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButtonGallerynova = new System.Windows.Forms.RadioButton();
             this.radioButtonGallerysense = new System.Windows.Forms.RadioButton();
             this.btnGetURLsLink = new System.Windows.Forms.Button();
             this.radioButtonImagezilla = new System.Windows.Forms.RadioButton();
@@ -68,6 +69,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.chbUseSourceURLList = new System.Windows.Forms.CheckBox();
             this.btnPauseAllTask = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -84,7 +86,23 @@
             this.tbDirectoryStart = new System.Windows.Forms.TextBox();
             this.btnSelectFolder = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.tbTargetDownloadFolder = new System.Windows.Forms.TextBox();
+            this.btnSelectTargetFolder = new System.Windows.Forms.Button();
+            this.btnStartDownloadSingle = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.radioButtonGallerynovaD = new System.Windows.Forms.RadioButton();
+            this.radioButtonGallerysenseD = new System.Windows.Forms.RadioButton();
+            this.radioButtonImagezillaD = new System.Windows.Forms.RadioButton();
+            this.btnStartDownloadTask = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tbLimitSelectedRows = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbToURL = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbFromURL = new System.Windows.Forms.TextBox();
+            this.chbIsDownloaded = new System.Windows.Forms.CheckBox();
+            this.chbIsAllData = new System.Windows.Forms.CheckBox();
+            this.chbIsNotDownloaded = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -102,11 +120,12 @@
             this.tabPage3.SuspendLayout();
             this.panel7.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(103, 68);
+            this.btnStart.Location = new System.Drawing.Point(343, 40);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(85, 23);
             this.btnStart.TabIndex = 1;
@@ -121,7 +140,7 @@
             this.tbExtractResultURLs.Multiline = true;
             this.tbExtractResultURLs.Name = "tbExtractResultURLs";
             this.tbExtractResultURLs.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbExtractResultURLs.Size = new System.Drawing.Size(511, 448);
+            this.tbExtractResultURLs.Size = new System.Drawing.Size(511, 446);
             this.tbExtractResultURLs.TabIndex = 3;
             // 
             // tbSourceURLs
@@ -131,7 +150,7 @@
             this.tbSourceURLs.Multiline = true;
             this.tbSourceURLs.Name = "tbSourceURLs";
             this.tbSourceURLs.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbSourceURLs.Size = new System.Drawing.Size(398, 448);
+            this.tbSourceURLs.Size = new System.Drawing.Size(398, 446);
             this.tbSourceURLs.TabIndex = 4;
             // 
             // panel1
@@ -141,7 +160,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(909, 110);
+            this.panel1.Size = new System.Drawing.Size(909, 112);
             this.panel1.TabIndex = 5;
             // 
             // groupBox2
@@ -160,7 +179,7 @@
             this.groupBox2.Controls.Add(this.tbEndOfUrl);
             this.groupBox2.Location = new System.Drawing.Point(446, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(465, 100);
+            this.groupBox2.Size = new System.Drawing.Size(465, 102);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             // 
@@ -223,7 +242,7 @@
             this.tbPartOfUrl.Name = "tbPartOfUrl";
             this.tbPartOfUrl.Size = new System.Drawing.Size(387, 20);
             this.tbPartOfUrl.TabIndex = 23;
-            this.tbPartOfUrl.Text = "http://gallerynova.se/site/v/";
+            this.tbPartOfUrl.Text = "http://gallerysense.se/site/v/";
             // 
             // label4
             // 
@@ -271,6 +290,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnStartDownloadSingle);
+            this.groupBox1.Controls.Add(this.btnSelectTargetFolder);
+            this.groupBox1.Controls.Add(this.tbTargetDownloadFolder);
+            this.groupBox1.Controls.Add(this.radioButtonGallerynova);
             this.groupBox1.Controls.Add(this.radioButtonGallerysense);
             this.groupBox1.Controls.Add(this.btnStart);
             this.groupBox1.Controls.Add(this.btnGetURLsLink);
@@ -278,9 +301,19 @@
             this.groupBox1.Controls.Add(this.tbSourceURL);
             this.groupBox1.Location = new System.Drawing.Point(5, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(434, 100);
+            this.groupBox1.Size = new System.Drawing.Size(434, 102);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
+            // 
+            // radioButtonGallerynova
+            // 
+            this.radioButtonGallerynova.AutoSize = true;
+            this.radioButtonGallerynova.Location = new System.Drawing.Point(216, 19);
+            this.radioButtonGallerynova.Name = "radioButtonGallerynova";
+            this.radioButtonGallerynova.Size = new System.Drawing.Size(93, 17);
+            this.radioButtonGallerynova.TabIndex = 6;
+            this.radioButtonGallerynova.Text = "gallerynova.se";
+            this.radioButtonGallerynova.UseVisualStyleBackColor = true;
             // 
             // radioButtonGallerysense
             // 
@@ -296,7 +329,7 @@
             // 
             // btnGetURLsLink
             // 
-            this.btnGetURLsLink.Location = new System.Drawing.Point(12, 68);
+            this.btnGetURLsLink.Location = new System.Drawing.Point(252, 40);
             this.btnGetURLsLink.Name = "btnGetURLsLink";
             this.btnGetURLsLink.Size = new System.Drawing.Size(85, 23);
             this.btnGetURLsLink.TabIndex = 5;
@@ -318,7 +351,7 @@
             // 
             this.tbSourceURL.Location = new System.Drawing.Point(12, 42);
             this.tbSourceURL.Name = "tbSourceURL";
-            this.tbSourceURL.Size = new System.Drawing.Size(416, 20);
+            this.tbSourceURL.Size = new System.Drawing.Size(234, 20);
             this.tbSourceURL.TabIndex = 4;
             // 
             // statusStrip1
@@ -370,18 +403,18 @@
             // 
             this.panel2.Controls.Add(this.tbSourceURLs);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(3, 134);
+            this.panel2.Location = new System.Drawing.Point(3, 136);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(398, 448);
+            this.panel2.Size = new System.Drawing.Size(398, 446);
             this.panel2.TabIndex = 9;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.tbExtractResultURLs);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(401, 134);
+            this.panel3.Location = new System.Drawing.Point(401, 136);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(511, 448);
+            this.panel3.Size = new System.Drawing.Size(511, 446);
             this.panel3.TabIndex = 10;
             // 
             // panel5
@@ -389,7 +422,7 @@
             this.panel5.Controls.Add(this.label2);
             this.panel5.Controls.Add(this.label1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(3, 113);
+            this.panel5.Location = new System.Drawing.Point(3, 115);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(909, 21);
             this.panel5.TabIndex = 12;
@@ -442,9 +475,9 @@
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(401, 134);
+            this.splitter1.Location = new System.Drawing.Point(401, 136);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(10, 448);
+            this.splitter1.Size = new System.Drawing.Size(10, 446);
             this.splitter1.TabIndex = 13;
             this.splitter1.TabStop = false;
             // 
@@ -480,6 +513,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.groupBox5);
             this.panel4.Controls.Add(this.groupBox3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(3, 3);
@@ -493,15 +527,26 @@
             this.groupBox3.Controls.Add(this.chbUseSourceURLList);
             this.groupBox3.Controls.Add(this.btnPauseAllTask);
             this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.btnStartEx);
             this.groupBox3.Controls.Add(this.btnStopAllTask);
             this.groupBox3.Controls.Add(this.tbCountOfTask);
             this.groupBox3.Controls.Add(this.btnStartTask);
-            this.groupBox3.Location = new System.Drawing.Point(5, 3);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(899, 100);
+            this.groupBox3.Size = new System.Drawing.Size(297, 105);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(77, 48);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(126, 17);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "Use Source URL List";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // chbUseSourceURLList
             // 
@@ -536,7 +581,7 @@
             // 
             // btnStartEx
             // 
-            this.btnStartEx.Location = new System.Drawing.Point(296, 71);
+            this.btnStartEx.Location = new System.Drawing.Point(487, 76);
             this.btnStartEx.Name = "btnStartEx";
             this.btnStartEx.Size = new System.Drawing.Size(120, 23);
             this.btnStartEx.TabIndex = 3;
@@ -657,16 +702,177 @@
             // 
             this.folderBrowserDialog1.ShowNewFolderButton = false;
             // 
-            // checkBox1
+            // tbTargetDownloadFolder
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(77, 48);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(126, 17);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Use Source URL List";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.tbTargetDownloadFolder.Location = new System.Drawing.Point(12, 66);
+            this.tbTargetDownloadFolder.Name = "tbTargetDownloadFolder";
+            this.tbTargetDownloadFolder.Size = new System.Drawing.Size(234, 20);
+            this.tbTargetDownloadFolder.TabIndex = 7;
+            // 
+            // btnSelectTargetFolder
+            // 
+            this.btnSelectTargetFolder.Location = new System.Drawing.Point(252, 63);
+            this.btnSelectTargetFolder.Name = "btnSelectTargetFolder";
+            this.btnSelectTargetFolder.Size = new System.Drawing.Size(10, 23);
+            this.btnSelectTargetFolder.TabIndex = 8;
+            this.btnSelectTargetFolder.UseVisualStyleBackColor = true;
+            this.btnSelectTargetFolder.Click += new System.EventHandler(this.btnSelectTargetFolder_Click);
+            // 
+            // btnStartDownloadSingle
+            // 
+            this.btnStartDownloadSingle.Location = new System.Drawing.Point(264, 63);
+            this.btnStartDownloadSingle.Name = "btnStartDownloadSingle";
+            this.btnStartDownloadSingle.Size = new System.Drawing.Size(73, 23);
+            this.btnStartDownloadSingle.TabIndex = 9;
+            this.btnStartDownloadSingle.Text = "Start Downl";
+            this.btnStartDownloadSingle.UseVisualStyleBackColor = true;
+            this.btnStartDownloadSingle.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.chbIsNotDownloaded);
+            this.groupBox5.Controls.Add(this.chbIsAllData);
+            this.groupBox5.Controls.Add(this.chbIsDownloaded);
+            this.groupBox5.Controls.Add(this.label10);
+            this.groupBox5.Controls.Add(this.tbLimitSelectedRows);
+            this.groupBox5.Controls.Add(this.label11);
+            this.groupBox5.Controls.Add(this.tbToURL);
+            this.groupBox5.Controls.Add(this.label12);
+            this.groupBox5.Controls.Add(this.tbFromURL);
+            this.groupBox5.Controls.Add(this.btnStartDownloadTask);
+            this.groupBox5.Controls.Add(this.radioButtonGallerynovaD);
+            this.groupBox5.Controls.Add(this.radioButtonGallerysenseD);
+            this.groupBox5.Controls.Add(this.radioButtonImagezillaD);
+            this.groupBox5.Controls.Add(this.btnStartEx);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox5.Location = new System.Drawing.Point(297, 0);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(612, 105);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            // 
+            // radioButtonGallerynovaD
+            // 
+            this.radioButtonGallerynovaD.AutoSize = true;
+            this.radioButtonGallerynovaD.Location = new System.Drawing.Point(201, 18);
+            this.radioButtonGallerynovaD.Name = "radioButtonGallerynovaD";
+            this.radioButtonGallerynovaD.Size = new System.Drawing.Size(93, 17);
+            this.radioButtonGallerynovaD.TabIndex = 9;
+            this.radioButtonGallerynovaD.Text = "gallerynova.se";
+            this.radioButtonGallerynovaD.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonGallerysenseD
+            // 
+            this.radioButtonGallerysenseD.AutoSize = true;
+            this.radioButtonGallerysenseD.Checked = true;
+            this.radioButtonGallerysenseD.Location = new System.Drawing.Point(6, 18);
+            this.radioButtonGallerysenseD.Name = "radioButtonGallerysenseD";
+            this.radioButtonGallerysenseD.Size = new System.Drawing.Size(97, 17);
+            this.radioButtonGallerysenseD.TabIndex = 7;
+            this.radioButtonGallerysenseD.TabStop = true;
+            this.radioButtonGallerysenseD.Text = "gallerysense.se";
+            this.radioButtonGallerysenseD.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonImagezillaD
+            // 
+            this.radioButtonImagezillaD.AutoSize = true;
+            this.radioButtonImagezillaD.Location = new System.Drawing.Point(107, 18);
+            this.radioButtonImagezillaD.Name = "radioButtonImagezillaD";
+            this.radioButtonImagezillaD.Size = new System.Drawing.Size(88, 17);
+            this.radioButtonImagezillaD.TabIndex = 8;
+            this.radioButtonImagezillaD.Text = "imagezilla.net";
+            this.radioButtonImagezillaD.UseVisualStyleBackColor = true;
+            // 
+            // btnStartDownloadTask
+            // 
+            this.btnStartDownloadTask.Location = new System.Drawing.Point(6, 71);
+            this.btnStartDownloadTask.Name = "btnStartDownloadTask";
+            this.btnStartDownloadTask.Size = new System.Drawing.Size(73, 23);
+            this.btnStartDownloadTask.TabIndex = 10;
+            this.btnStartDownloadTask.Text = "Start Downl";
+            this.btnStartDownloadTask.UseVisualStyleBackColor = true;
+            this.btnStartDownloadTask.Click += new System.EventHandler(this.btnStartDownloadTask_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(176, 49);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(28, 13);
+            this.label10.TabIndex = 34;
+            this.label10.Text = "Limit";
+            // 
+            // tbLimitSelectedRows
+            // 
+            this.tbLimitSelectedRows.Location = new System.Drawing.Point(208, 45);
+            this.tbLimitSelectedRows.Name = "tbLimitSelectedRows";
+            this.tbLimitSelectedRows.Size = new System.Drawing.Size(55, 20);
+            this.tbLimitSelectedRows.TabIndex = 33;
+            this.tbLimitSelectedRows.Text = "0";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(91, 48);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(26, 13);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "End";
+            // 
+            // tbToURL
+            // 
+            this.tbToURL.Location = new System.Drawing.Point(117, 45);
+            this.tbToURL.Name = "tbToURL";
+            this.tbToURL.Size = new System.Drawing.Size(55, 20);
+            this.tbToURL.TabIndex = 31;
+            this.tbToURL.Text = "903915";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 48);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(34, 13);
+            this.label12.TabIndex = 30;
+            this.label12.Text = "Begin";
+            // 
+            // tbFromURL
+            // 
+            this.tbFromURL.Location = new System.Drawing.Point(36, 45);
+            this.tbFromURL.Name = "tbFromURL";
+            this.tbFromURL.Size = new System.Drawing.Size(55, 20);
+            this.tbFromURL.TabIndex = 29;
+            this.tbFromURL.Text = "900000";
+            // 
+            // chbIsDownloaded
+            // 
+            this.chbIsDownloaded.AutoSize = true;
+            this.chbIsDownloaded.Location = new System.Drawing.Point(300, 21);
+            this.chbIsDownloaded.Name = "chbIsDownloaded";
+            this.chbIsDownloaded.Size = new System.Drawing.Size(86, 17);
+            this.chbIsDownloaded.TabIndex = 35;
+            this.chbIsDownloaded.Text = "Downloaded";
+            this.chbIsDownloaded.UseVisualStyleBackColor = true;
+            // 
+            // chbIsAllData
+            // 
+            this.chbIsAllData.AutoSize = true;
+            this.chbIsAllData.Location = new System.Drawing.Point(300, 61);
+            this.chbIsAllData.Name = "chbIsAllData";
+            this.chbIsAllData.Size = new System.Drawing.Size(75, 17);
+            this.chbIsAllData.TabIndex = 36;
+            this.chbIsAllData.Text = "SelAllData";
+            this.chbIsAllData.UseVisualStyleBackColor = true;
+            // 
+            // chbIsNotDownloaded
+            // 
+            this.chbIsNotDownloaded.AutoSize = true;
+            this.chbIsNotDownloaded.Location = new System.Drawing.Point(300, 41);
+            this.chbIsNotDownloaded.Name = "chbIsNotDownloaded";
+            this.chbIsNotDownloaded.Size = new System.Drawing.Size(103, 17);
+            this.chbIsNotDownloaded.TabIndex = 37;
+            this.chbIsNotDownloaded.Text = "NotDownloaded";
+            this.chbIsNotDownloaded.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -704,6 +910,8 @@
             this.panel7.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -766,6 +974,24 @@
         private System.Windows.Forms.Button btnPauseAllTask;
         private System.Windows.Forms.CheckBox chbUseSourceURLList;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.RadioButton radioButtonGallerynova;
+        private System.Windows.Forms.Button btnSelectTargetFolder;
+        private System.Windows.Forms.TextBox tbTargetDownloadFolder;
+        private System.Windows.Forms.Button btnStartDownloadSingle;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.CheckBox chbIsAllData;
+        private System.Windows.Forms.CheckBox chbIsDownloaded;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox tbLimitSelectedRows;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox tbToURL;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tbFromURL;
+        private System.Windows.Forms.Button btnStartDownloadTask;
+        private System.Windows.Forms.RadioButton radioButtonGallerynovaD;
+        private System.Windows.Forms.RadioButton radioButtonGallerysenseD;
+        private System.Windows.Forms.RadioButton radioButtonImagezillaD;
+        private System.Windows.Forms.CheckBox chbIsNotDownloaded;
     }
 }
 
