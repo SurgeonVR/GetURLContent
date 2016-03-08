@@ -77,5 +77,17 @@ namespace GetURLContent.Properties {
                 return ((string)(this["RegExPatternFirstForLinksGallerySense"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string tbTargetDownloadFolder {
+            get {
+                return ((string)(this["tbTargetDownloadFolder"]));
+            }
+            set {
+                this["tbTargetDownloadFolder"] = value;
+            }
+        }
     }
 }

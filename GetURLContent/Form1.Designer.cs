@@ -58,7 +58,8 @@
             this.toolStripStatusLabelErrorFlag = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.progressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tlSLabelCountActiveTask = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tlSLabelCountCurrentTask = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -326,10 +327,12 @@
             // 
             // tbTargetDownloadFolder
             // 
+            this.tbTargetDownloadFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::GetURLContent.Properties.Settings.Default, "tbTargetDownloadFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbTargetDownloadFolder.Location = new System.Drawing.Point(12, 66);
             this.tbTargetDownloadFolder.Name = "tbTargetDownloadFolder";
             this.tbTargetDownloadFolder.Size = new System.Drawing.Size(234, 20);
             this.tbTargetDownloadFolder.TabIndex = 7;
+            this.tbTargetDownloadFolder.Text = global::GetURLContent.Properties.Settings.Default.tbTargetDownloadFolder;
             // 
             // radioButtonGallerynova
             // 
@@ -386,10 +389,11 @@
             this.toolStripStatusLabelErrorFlag,
             this.toolStripSplitButton1,
             this.progressBar1,
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 582);
+            this.tlSLabelCountActiveTask,
+            this.tlSLabelCountCurrentTask});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 611);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(909, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(923, 22);
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -419,11 +423,17 @@
             this.progressBar1.Size = new System.Drawing.Size(350, 16);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             // 
-            // toolStripStatusLabel1
+            // tlSLabelCountActiveTask
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(81, 17);
-            this.toolStripStatusLabel1.Text = "Active Task {0}";
+            this.tlSLabelCountActiveTask.Name = "tlSLabelCountActiveTask";
+            this.tlSLabelCountActiveTask.Size = new System.Drawing.Size(62, 17);
+            this.tlSLabelCountActiveTask.Text = "Active Task";
+            // 
+            // tlSLabelCountCurrentTask
+            // 
+            this.tlSLabelCountCurrentTask.Name = "tlSLabelCountCurrentTask";
+            this.tlSLabelCountCurrentTask.Size = new System.Drawing.Size(69, 17);
+            this.tlSLabelCountCurrentTask.Text = "Current Task";
             // 
             // panel2
             // 
@@ -480,7 +490,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(923, 633);
+            this.tabControl1.Size = new System.Drawing.Size(923, 611);
             this.tabControl1.TabIndex = 13;
             // 
             // tabPage1
@@ -490,11 +500,10 @@
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.panel5);
             this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Controls.Add(this.statusStrip1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(915, 607);
+            this.tabPage1.Size = new System.Drawing.Size(915, 585);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "SingleMode";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -588,9 +597,9 @@
             this.chbIsAllData.AutoSize = true;
             this.chbIsAllData.Location = new System.Drawing.Point(300, 61);
             this.chbIsAllData.Name = "chbIsAllData";
-            this.chbIsAllData.Size = new System.Drawing.Size(75, 17);
+            this.chbIsAllData.Size = new System.Drawing.Size(90, 17);
             this.chbIsAllData.TabIndex = 36;
-            this.chbIsAllData.Text = "SelAllData";
+            this.chbIsAllData.Text = "SelectAllData";
             this.chbIsAllData.UseVisualStyleBackColor = true;
             this.chbIsAllData.Click += new System.EventHandler(this.chbIsAllData_Click);
             // 
@@ -884,9 +893,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(923, 633);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.statusStrip1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Get URL Content v0.1.2  b18.02.16";
+            this.Text = "Get URL Content v1.1.2  b08.03.16";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -902,7 +913,6 @@
             this.panel5.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgMainData)).EndInit();
@@ -917,6 +927,7 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -962,7 +973,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnStartEx;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel tlSLabelCountActiveTask;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -996,6 +1007,7 @@
         private System.Windows.Forms.RadioButton radioButtonGallerysenseD;
         private System.Windows.Forms.RadioButton radioButtonImagezillaD;
         private System.Windows.Forms.CheckBox chbIsNotDownloaded;
+        private System.Windows.Forms.ToolStripStatusLabel tlSLabelCountCurrentTask;
     }
 }
 

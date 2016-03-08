@@ -30,7 +30,7 @@ namespace GetURLContent
         public static TextBox TransferTextResult = new TextBox();
         public static TextBox TransferTextSource = new TextBox();
         public static TextBox ClearTextSource = new TextBox();
-        public static TextBox ActiveTaskCount = new TextBox();
+        //public static TextBox ActiveTaskCount = new TextBox();
         public static int CountOfTask = new int(); // 20.02.16 max count of active task
         public static bool ExitOnDemand = new bool(); // 23.02.16 .T. - break all of task  
         public static bool PauseOnDemand = new bool(); // 24.02.16 .T. - pause all of tasks that not started yet  
@@ -48,8 +48,10 @@ namespace GetURLContent
 
         // 08.03.15 изучение пользовательских событий
         //----------------------------------------------------------
-        public event EventHandler SetProgress;
+        public event EventHandler SetProgress;  // 
         public event EventHandler InitProgress;
+        public event EventHandler CountActiveTask;
+        public event EventHandler CurrentTaskName;
         //----------------------------------------------------------
 
         public Form1()
@@ -59,7 +61,7 @@ namespace GetURLContent
             TransferTextResult.TextChanged += TransferTextResult_TextChanged;
             TransferTextSource.TextChanged += TransferTextSource_TextChanged;
             ClearTextSource.TextChanged += ClearTextSource_TextChanged;
-            ActiveTaskCount.TextChanged += ActiveTaskCount_TextChanged;
+            //ActiveTaskCount.TextChanged += ActiveTaskCount_TextChanged;
             //Control.CheckForIllegalCrossThreadCalls = false;
             CountOfTask = int.Parse(tbCountOfTask.Text);
             UseSourceList = false;
@@ -67,6 +69,8 @@ namespace GetURLContent
 
             SetProgress += OnSetProgress;
             InitProgress += OnInitProgress;
+            CountActiveTask += OnActiveTaskCount;
+            CurrentTaskName += OnCureentTaskName;
         }
 
 
@@ -76,11 +80,26 @@ namespace GetURLContent
         // Use verbose in Source URL and Etracted URL
         public static bool UseVerbose { get; set; }
 
+        //08.03.16 Print name of active task
+        private void OnCureentTaskName(object sender, EventArgs e)
+        {
+            tlSLabelCountCurrentTask.Text = String.Format("Current Task - {0}", (string)sender);
+        }
+
+        //08.03.16 Print count of active task
+        private void OnActiveTaskCount(object sender, EventArgs e)
+        {
+            tlSLabelCountActiveTask.Text = String.Format("Active Task - {0}", (int)sender);
+            btnStartTask.ForeColor = ((int)sender > 0 && !PauseOnDemand) ? Color.DarkGreen : SystemColors.ControlText;
+        }
+
+
+
         // Print count of active task
         private void ActiveTaskCount_TextChanged(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = String.Format("Active Task {0}", ActiveTaskCount.Text);
-            btnStartTask.ForeColor = (int.Parse(ActiveTaskCount.Text) > 0 && !PauseOnDemand) ? Color.DarkGreen : SystemColors.ControlText;
+            //tlSLabelCountActiveTask.Text = String.Format("Active Task {0}", ActiveTaskCount.Text);
+            //btnStartTask.ForeColor = (int.Parse(ActiveTaskCount.Text) > 0 && !PauseOnDemand) ? Color.DarkGreen : SystemColors.ControlText;
         }
 
         private void ClearTextSource_TextChanged(object sender, EventArgs e)
@@ -723,7 +742,7 @@ namespace GetURLContent
             //Task task1 = new Task(() => GetURLContentTask(my_par));
             ExitOnDemand = false;
             PauseOnDemand = false;
-            Object[] my_par = new Object[11];
+            Object[] my_par = new Object[13];
             MultiT GT = new MultiT();
             Task task1 = new Task(delegate { GT.MainAppTaskCL(my_par); });
             //Task task1 = new Task(new Action(GT.MainAppTaskCL));
@@ -739,6 +758,8 @@ namespace GetURLContent
             my_par[8] = GetSiteType;
             my_par[9] = InitProgress;
             my_par[10] = SetProgress;
+            my_par[11] = CountActiveTask;
+            my_par[12] = CurrentTaskName;
 
 
             task1.Start();
@@ -779,7 +800,7 @@ namespace GetURLContent
                    
                     if (GlobalTaskList.Count() <= CountOfTask)
                     {
-                        Object[] my_par = new Object[3];
+                        Object[] my_par = new Object[5];
                         //Task task1 = new Task(() => GetURLContentTask(my_par));
                         //Task task1 = new Task(delegate { GetURLContentTask(my_par); });
                         //Task task1 = new Task(new Action(FT.GetURLContentTaskT));
@@ -790,7 +811,9 @@ namespace GetURLContent
 
                         my_par[0] = s;
                         my_par[1] = task1;
-                        my_par[2] = TUrlCollection[8];
+                        my_par[2] = TUrlCollection[8];  // SiteType
+                        my_par[3] = TUrlCollection[11]; // 08.03.16 count of active task
+                        my_par[4] = TUrlCollection[12]; // 08.03.16 name of current task
 
 
                         lock (GlobalTaskListLocker) { GlobalTaskList.Add(task1);}
@@ -805,7 +828,7 @@ namespace GetURLContent
                             Thread.Sleep(10);
                         } while (GlobalTaskList.Count() > CountOfTask);
 
-                        Object[] my_par = new Object[3];
+                        Object[] my_par = new Object[5];
                         //Task task1 = new Task(() => GetURLContentTask(my_par));
                         //Task task1 = new Task(delegate { GetURLContentTask(my_par); });
                         //Task task1 = new Task(new Action(FT.GetURLContentTaskT));
@@ -816,7 +839,9 @@ namespace GetURLContent
 
                         my_par[0] = s;
                         my_par[1] = task1;
-                        my_par[2] = TUrlCollection[8];
+                        my_par[2] = TUrlCollection[8];  // SiteType
+                        my_par[3] = TUrlCollection[11]; // 08.03.16 count of active task
+                        my_par[4] = TUrlCollection[12]; // 08.03.16 name of current task
 
                         lock (GlobalTaskListLocker) { GlobalTaskList.Add(task1); }
                         Debug.WriteLine(string.Format("Added(E) In TaskList Id {0},Url {1}", task1.Id.ToString(), s));
@@ -894,7 +919,9 @@ namespace GetURLContent
                     GlobalTaskList.Remove((Task)vURLAddress[1]);
                     Debug.WriteLine(string.Format("GlobalTaskList Containts Task Id {0}, {1}", ((Task)vURLAddress[1]).Id.ToString(), GlobalTaskList.Contains((Task)vURLAddress[1]) ? "True" : "false"));
                 };
-                lock (ActiveTaskCountLocker) { ActiveTaskCount.Text = GlobalTaskList.Count().ToString();  }
+                //lock (ActiveTaskCountLocker) { ActiveTaskCount.Text = GlobalTaskList.Count().ToString();  }
+                ((EventHandler)vURLAddress[3])(GlobalTaskList.Count(), new EventArgs()); // 08.03.16 Shof count of active task
+                ((EventHandler)vURLAddress[4])(intURL, new EventArgs()); // 08.03.16 Shof name of active task
                 lock (TransferTextResultLocker) { TransferTextResult.Text = match1.Value; }
                 lock (TransferTextSourceLocker) { TransferTextSource.Text = intURL; }
                 DBOperations db = new DBOperations();
@@ -919,7 +946,7 @@ namespace GetURLContent
             //Task task1 = new Task(() => GetURLContentTask(my_par));
             ExitOnDemand = false;
             PauseOnDemand = false;
-            Object[] my_par = new Object[5];
+            Object[] my_par = new Object[7];
             MultiTFileDownload GT = new MultiTFileDownload();
             Task task1 = new Task(delegate { GT.MainAppTaskCL(my_par); });
             //Task task1 = new Task(new Action(GT.MainAppTaskCL));
@@ -929,6 +956,8 @@ namespace GetURLContent
             my_par[2] = GetSiteTypeD;
             my_par[3] = InitProgress;
             my_par[4] = SetProgress;
+            my_par[5] = CountActiveTask;
+            my_par[6] = CurrentTaskName;
 
             task1.Start();
         }
@@ -954,7 +983,7 @@ namespace GetURLContent
 
                     if (GlobalTaskList.Count() <= CountOfTask)
                     {
-                        Object[] my_par = new Object[4];
+                        Object[] my_par = new Object[6];
                         //Task task1 = new Task(() => GetURLContentTask(my_par));
                         //Task task1 = new Task(delegate { GetURLContentTask(my_par); });
                         //Task task1 = new Task(new Action(FT.GetURLContentTaskT));
@@ -965,9 +994,10 @@ namespace GetURLContent
 
                         my_par[0] = s;
                         my_par[1] = task1;
-                        my_par[2] = Params[1]; // SiteType
-                        my_par[3] = Params[2]; // TargetFolder For Save
-
+                        my_par[2] = Params[1]; // TargetFolder For Save
+                        my_par[3] = Params[2]; // SiteType
+                        my_par[4] = Params[5]; // 08.03.16 count of active task
+                        my_par[5] = Params[6]; // 08.03.16 name of current task
 
 
                         lock (GlobalTaskListLocker) { GlobalTaskList.Add(task1); }
@@ -982,7 +1012,7 @@ namespace GetURLContent
                             Thread.Sleep(10);
                         } while (GlobalTaskList.Count() > CountOfTask);
 
-                        Object[] my_par = new Object[4];
+                        Object[] my_par = new Object[6];
                         //Task task1 = new Task(() => GetURLContentTask(my_par));
                         //Task task1 = new Task(delegate { GetURLContentTask(my_par); });
                         //Task task1 = new Task(new Action(FT.GetURLContentTaskT));
@@ -993,8 +1023,10 @@ namespace GetURLContent
 
                         my_par[0] = s;
                         my_par[1] = task1;
-                        my_par[2] = Params[1]; // SiteType
-                        my_par[3] = Params[2]; // TargetFolder For Save
+                        my_par[2] = Params[1]; // TargetFolder For Save
+                        my_par[3] = Params[2]; // SiteType
+                        my_par[4] = Params[5]; // 08.03.16 count of active task
+                        my_par[5] = Params[6]; // 08.03.16 name of current task
 
                         lock (GlobalTaskListLocker) { GlobalTaskList.Add(task1); }
                         Debug.WriteLine(string.Format("Added(E) In TaskList Id {0},Url {1}", task1.Id.ToString(), s));
@@ -1051,7 +1083,9 @@ namespace GetURLContent
                     GlobalTaskList.Remove((Task)Params[1]);
                     Debug.WriteLine(string.Format("GlobalTaskList Containts Task Id {0}, {1}", ((Task)Params[1]).Id.ToString(), GlobalTaskList.Contains((Task)Params[1]) ? "True" : "false"));
                 };
-                lock (ActiveTaskCountLocker) { ActiveTaskCount.Text = GlobalTaskList.Count().ToString(); }
+                //lock (ActiveTaskCountLocker) { ActiveTaskCount.Text = GlobalTaskList.Count().ToString(); }
+                ((EventHandler)Params[4])(GlobalTaskList.Count(), new EventArgs()); // 08.03.16 Shof count of active task
+                ((EventHandler)Params[5])(((DataRow)Params[0]).ItemArray.GetValue(3).ToString(), new EventArgs()); // 08.03.16 name of active task
                 DBOperations db = new DBOperations();
                 db.UpdateDownloadedFile(new string[] { IdTargetURL, ErrFlag == 1 ? err : string.Empty });
 
@@ -1145,6 +1179,10 @@ namespace GetURLContent
                 tbToURL.Enabled = !tbToURL.Enabled;
             }
         }
-        
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+        }
     }
 }
