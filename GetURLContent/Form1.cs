@@ -45,6 +45,13 @@ namespace GetURLContent
 
         delegate void SetTextCallback(string text);
 
+
+        // 08.03.15 изучение пользовательских событий
+        //----------------------------------------------------------
+        public event EventHandler SetProgress;
+        public event EventHandler InitProgress;
+        //----------------------------------------------------------
+
         public Form1()
         {
             Control.CheckForIllegalCrossThreadCalls = false;
@@ -57,7 +64,11 @@ namespace GetURLContent
             CountOfTask = int.Parse(tbCountOfTask.Text);
             UseSourceList = false;
             UseVerbose = false;
+
+            SetProgress += OnSetProgress;
+            InitProgress += OnInitProgress;
         }
+
 
         // Use URL list tbSourceURLs as source for looping end extracting target URL 
         public static bool UseSourceList { get; set; }
@@ -89,6 +100,18 @@ namespace GetURLContent
           if (UseVerbose)  this.tbExtractResultURLs.AppendText(TransferTextResult.Text + System.Environment.NewLine)  ;
         }
 
+        // 08.03.16 ініт прогресбара
+        private void OnInitProgress(object sender, EventArgs e)
+        {
+            this.progressBar1.Maximum = (int) sender;
+            this.progressBar1.Value = 0;
+        }
+
+        // 08.03.16 муваю прогресбар
+        private void OnSetProgress(object sender, EventArgs e)
+        {
+            this.progressBar1.Value = (int)sender;
+        }
 
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -512,12 +535,13 @@ namespace GetURLContent
             string SQLTextMiidle = " Where SourceSiteTypeID = " + (int) GetSiteTypeD ;  
             string SQLTextMiidle_01 = (chbIsDownloaded.Checked ? " And DownloadState = 1 " : chbIsNotDownloaded.Checked ? " And DownloadState = 0 " : string.Empty);
             string SQLTextMiidle_02 = chbIsAllData.Checked ?  string.Empty : (tbFromURL.Text != string.Empty ? tbToURL.Text != string.Empty ? " And SourceSiteId between " + tbFromURL.Text + " and " + tbToURL.Text + " " : string.Empty : string.Empty);
+            string SQLTextMiidle_03 = " order by SourceSiteID ";
             string SQLTextLast = chbIsAllData.Checked ? tbLimitSelectedRows.Text == "0" ? string.Empty : " Limit " + tbLimitSelectedRows.Text : tbLimitSelectedRows.Text != "0" ? " Limit " + tbLimitSelectedRows.Text : string.Empty;
 
             DataSet dt = new DataSet();
             dt.Reset();
             SQLiteCommand cmd = new SQLiteCommand();
-            cmd.CommandText = SQLTextFirst + SQLTextMiidle + SQLTextMiidle_01 + SQLTextMiidle_02 + SQLTextLast;
+            cmd.CommandText = SQLTextFirst + SQLTextMiidle + SQLTextMiidle_01 + SQLTextMiidle_02 + SQLTextMiidle_03 + SQLTextLast;
             cmd.Connection = cn;
             SQLiteDataAdapter ad = new SQLiteDataAdapter(cmd);
 
@@ -657,7 +681,7 @@ namespace GetURLContent
             DBOperations db = new DBOperations();
             SQLiteConnection cn = db.EstablistSQLiteConnection();
             //this.dataGridView1.AutoGenerateColumns = true;
-            this.dataGridView1.DataSource = GetDBMainData(cn).Tables["UrlList"];
+            this.dgMainData.DataSource = GetDBMainData(cn).Tables["UrlList"];
 
         }
 
@@ -699,7 +723,7 @@ namespace GetURLContent
             //Task task1 = new Task(() => GetURLContentTask(my_par));
             ExitOnDemand = false;
             PauseOnDemand = false;
-            Object[] my_par = new Object[9];
+            Object[] my_par = new Object[11];
             MultiT GT = new MultiT();
             Task task1 = new Task(delegate { GT.MainAppTaskCL(my_par); });
             //Task task1 = new Task(new Action(GT.MainAppTaskCL));
@@ -713,8 +737,12 @@ namespace GetURLContent
             my_par[6] = tbCountOfRandomUrls;
             my_par[7] = checkBoxIsRandomGen;
             my_par[8] = GetSiteType;
+            my_par[9] = InitProgress;
+            my_par[10] = SetProgress;
+
 
             task1.Start();
+            
         }
 
 
@@ -724,7 +752,7 @@ namespace GetURLContent
             List<String> q = new List<string>();
             private object[] TUrlCollection;
             TextBox vUrlCollection = new TextBox(); 
-
+            
             public  void MainAppTaskCL(object[] UrlCollection)
             {
                 TUrlCollection =  UrlCollection;
@@ -733,7 +761,7 @@ namespace GetURLContent
                 ClearTextSource.Text = "0"; //Clear tbSourceURLs by eventHandler on ClearTextSource.TextChanged
                 URLList UL;
                 String[] my_array;
-
+                int ProgressCount = 0;
                
                 //if (((TextBox)TUrlCollection[0]).Lines.Count() == 0 ) 
                 if (!UseSourceList) // генерячу рандомні урли щоб не набивать їх в текстове поле якщо tbSourceURLs пустий
@@ -742,6 +770,8 @@ namespace GetURLContent
                     my_array = UL.GetRandomURLs(int.Parse(((TextBox)TUrlCollection[4]).Text), int.Parse(((TextBox)TUrlCollection[5]).Text), ((CheckBox)TUrlCollection[7]).Checked); //  генерячу рандомні урли щоб не набивать їх в текстове поле
                 }
                 else my_array = vUrlCollection.Lines.ToArray(); // якщо не пустий список то беру звідти дані для роботи
+
+                ((EventHandler)TUrlCollection[9])(my_array.Count(), new EventArgs()); // 08.03.16 ініт прогресбара
 
 
                 foreach (string s in my_array)
@@ -804,6 +834,8 @@ namespace GetURLContent
                         Thread.Sleep(500);
                     }
                     // End service Code
+                    ProgressCount += 1 ;
+                    ((EventHandler)TUrlCollection[10])(ProgressCount, new EventArgs()); // 08.03.16 муваю прогрес бар
                 }
 
 
@@ -866,7 +898,7 @@ namespace GetURLContent
                 lock (TransferTextResultLocker) { TransferTextResult.Text = match1.Value; }
                 lock (TransferTextSourceLocker) { TransferTextSource.Text = intURL; }
                 DBOperations db = new DBOperations();
-                db.InsertNewURLData(new string[] { System.IO.Path.GetFileName(intURL), ( ((int) (SiteType)vURLAddress[2])).ToString() , intURL, match1.Value, ErrFlag.ToString(), System.IO.Path.GetFileName(match1.Value) });
+                db.InsertNewURLData(new string[] { System.IO.Path.GetFileName(intURL), ( ((int) (SiteType)vURLAddress[2])).ToString() , intURL, match1.Value, (match1.Value.Length == 0 ? "1" : ErrFlag.ToString()), System.IO.Path.GetFileName(match1.Value) });
 
             }
 
@@ -887,7 +919,7 @@ namespace GetURLContent
             //Task task1 = new Task(() => GetURLContentTask(my_par));
             ExitOnDemand = false;
             PauseOnDemand = false;
-            Object[] my_par = new Object[3];
+            Object[] my_par = new Object[5];
             MultiTFileDownload GT = new MultiTFileDownload();
             Task task1 = new Task(delegate { GT.MainAppTaskCL(my_par); });
             //Task task1 = new Task(new Action(GT.MainAppTaskCL));
@@ -895,6 +927,8 @@ namespace GetURLContent
             my_par[0] = ds;
             my_par[1] = tbTargetDownloadFolder;
             my_par[2] = GetSiteTypeD;
+            my_par[3] = InitProgress;
+            my_par[4] = SetProgress;
 
             task1.Start();
         }
@@ -904,6 +938,7 @@ namespace GetURLContent
         {
             private object[] Params;
             DataSet ds;
+            int ProgressCount = 0;
 
             public void MainAppTaskCL(object[] Params)
             {
@@ -912,6 +947,7 @@ namespace GetURLContent
 
                 lock (GlobalTaskListLocker) { GlobalTaskList.Clear(); }
 
+                ((EventHandler)Params[3])(ds.Tables["UrlList"].Rows.Count, new EventArgs()); // 08.03.16 ініт прогресбара
 
                 foreach (DataRow  s in ds.Tables["UrlList"].Rows)
                 {
@@ -929,8 +965,8 @@ namespace GetURLContent
 
                         my_par[0] = s;
                         my_par[1] = task1;
-                        my_par[2] = Params[1];
-                        my_par[3] = Params[2];
+                        my_par[2] = Params[1]; // SiteType
+                        my_par[3] = Params[2]; // TargetFolder For Save
 
 
 
@@ -957,8 +993,8 @@ namespace GetURLContent
 
                         my_par[0] = s;
                         my_par[1] = task1;
-                        my_par[2] = Params[1];
-                        my_par[3] = Params[2];
+                        my_par[2] = Params[1]; // SiteType
+                        my_par[3] = Params[2]; // TargetFolder For Save
 
                         lock (GlobalTaskListLocker) { GlobalTaskList.Add(task1); }
                         Debug.WriteLine(string.Format("Added(E) In TaskList Id {0},Url {1}", task1.Id.ToString(), s));
@@ -976,6 +1012,8 @@ namespace GetURLContent
                         Thread.Sleep(500);
                     }
                     // End service Code
+                    ProgressCount += 1;
+                    ((EventHandler)Params[4])(ProgressCount, new EventArgs()); // 08.03.16 муваю прогрес бар
                 }
             }
         }
@@ -1099,6 +1137,14 @@ namespace GetURLContent
             MainAppDownload();
         }
 
-
+        private void chbIsAllData_Click(object sender, EventArgs e)
+        {
+            if ( ((Control)sender).Name == chbIsAllData.Name)
+            {
+                tbFromURL.Enabled = !tbFromURL.Enabled;
+                tbToURL.Enabled = !tbToURL.Enabled;
+            }
+        }
+        
     }
 }

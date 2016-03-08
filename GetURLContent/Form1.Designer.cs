@@ -46,6 +46,9 @@
             this.tbNumberOfBeginUrl = new System.Windows.Forms.TextBox();
             this.tbEndOfUrl = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnStartDownloadSingle = new System.Windows.Forms.Button();
+            this.btnSelectTargetFolder = new System.Windows.Forms.Button();
+            this.tbTargetDownloadFolder = new System.Windows.Forms.TextBox();
             this.radioButtonGallerynova = new System.Windows.Forms.RadioButton();
             this.radioButtonGallerysense = new System.Windows.Forms.RadioButton();
             this.btnGetURLsLink = new System.Windows.Forms.Button();
@@ -66,14 +69,28 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgMainData = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.chbIsNotDownloaded = new System.Windows.Forms.CheckBox();
+            this.chbIsAllData = new System.Windows.Forms.CheckBox();
+            this.chbIsDownloaded = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tbLimitSelectedRows = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbToURL = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbFromURL = new System.Windows.Forms.TextBox();
+            this.btnStartDownloadTask = new System.Windows.Forms.Button();
+            this.radioButtonGallerynovaD = new System.Windows.Forms.RadioButton();
+            this.radioButtonGallerysenseD = new System.Windows.Forms.RadioButton();
+            this.radioButtonImagezillaD = new System.Windows.Forms.RadioButton();
+            this.btnStartEx = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.chbUseSourceURLList = new System.Windows.Forms.CheckBox();
             this.btnPauseAllTask = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.btnStartEx = new System.Windows.Forms.Button();
             this.btnStopAllTask = new System.Windows.Forms.Button();
             this.tbCountOfTask = new System.Windows.Forms.TextBox();
             this.btnStartTask = new System.Windows.Forms.Button();
@@ -86,23 +103,6 @@
             this.tbDirectoryStart = new System.Windows.Forms.TextBox();
             this.btnSelectFolder = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.tbTargetDownloadFolder = new System.Windows.Forms.TextBox();
-            this.btnSelectTargetFolder = new System.Windows.Forms.Button();
-            this.btnStartDownloadSingle = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.radioButtonGallerynovaD = new System.Windows.Forms.RadioButton();
-            this.radioButtonGallerysenseD = new System.Windows.Forms.RadioButton();
-            this.radioButtonImagezillaD = new System.Windows.Forms.RadioButton();
-            this.btnStartDownloadTask = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tbLimitSelectedRows = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbToURL = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tbFromURL = new System.Windows.Forms.TextBox();
-            this.chbIsDownloaded = new System.Windows.Forms.CheckBox();
-            this.chbIsAllData = new System.Windows.Forms.CheckBox();
-            this.chbIsNotDownloaded = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -114,13 +114,13 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgMainData)).BeginInit();
             this.panel4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.panel7.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStart
@@ -304,6 +304,32 @@
             this.groupBox1.Size = new System.Drawing.Size(434, 102);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
+            // 
+            // btnStartDownloadSingle
+            // 
+            this.btnStartDownloadSingle.Location = new System.Drawing.Point(264, 63);
+            this.btnStartDownloadSingle.Name = "btnStartDownloadSingle";
+            this.btnStartDownloadSingle.Size = new System.Drawing.Size(73, 23);
+            this.btnStartDownloadSingle.TabIndex = 9;
+            this.btnStartDownloadSingle.Text = "Start Downl";
+            this.btnStartDownloadSingle.UseVisualStyleBackColor = true;
+            this.btnStartDownloadSingle.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btnSelectTargetFolder
+            // 
+            this.btnSelectTargetFolder.Location = new System.Drawing.Point(252, 63);
+            this.btnSelectTargetFolder.Name = "btnSelectTargetFolder";
+            this.btnSelectTargetFolder.Size = new System.Drawing.Size(10, 23);
+            this.btnSelectTargetFolder.TabIndex = 8;
+            this.btnSelectTargetFolder.UseVisualStyleBackColor = true;
+            this.btnSelectTargetFolder.Click += new System.EventHandler(this.btnSelectTargetFolder_Click);
+            // 
+            // tbTargetDownloadFolder
+            // 
+            this.tbTargetDownloadFolder.Location = new System.Drawing.Point(12, 66);
+            this.tbTargetDownloadFolder.Name = "tbTargetDownloadFolder";
+            this.tbTargetDownloadFolder.Size = new System.Drawing.Size(234, 20);
+            this.tbTargetDownloadFolder.TabIndex = 7;
             // 
             // radioButtonGallerynova
             // 
@@ -495,21 +521,24 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.dataGridView1);
+            this.panel6.Controls.Add(this.dgMainData);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(3, 108);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(909, 496);
             this.panel6.TabIndex = 8;
             // 
-            // dataGridView1
+            // dgMainData
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(909, 496);
-            this.dataGridView1.TabIndex = 7;
+            this.dgMainData.AllowUserToAddRows = false;
+            this.dgMainData.AllowUserToDeleteRows = false;
+            this.dgMainData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgMainData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgMainData.Location = new System.Drawing.Point(0, 0);
+            this.dgMainData.Name = "dgMainData";
+            this.dgMainData.ReadOnly = true;
+            this.dgMainData.Size = new System.Drawing.Size(909, 496);
+            this.dgMainData.TabIndex = 7;
             // 
             // panel4
             // 
@@ -520,6 +549,163 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(909, 105);
             this.panel4.TabIndex = 6;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.chbIsNotDownloaded);
+            this.groupBox5.Controls.Add(this.chbIsAllData);
+            this.groupBox5.Controls.Add(this.chbIsDownloaded);
+            this.groupBox5.Controls.Add(this.label10);
+            this.groupBox5.Controls.Add(this.tbLimitSelectedRows);
+            this.groupBox5.Controls.Add(this.label11);
+            this.groupBox5.Controls.Add(this.tbToURL);
+            this.groupBox5.Controls.Add(this.label12);
+            this.groupBox5.Controls.Add(this.tbFromURL);
+            this.groupBox5.Controls.Add(this.btnStartDownloadTask);
+            this.groupBox5.Controls.Add(this.radioButtonGallerynovaD);
+            this.groupBox5.Controls.Add(this.radioButtonGallerysenseD);
+            this.groupBox5.Controls.Add(this.radioButtonImagezillaD);
+            this.groupBox5.Controls.Add(this.btnStartEx);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox5.Location = new System.Drawing.Point(297, 0);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(612, 105);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            // 
+            // chbIsNotDownloaded
+            // 
+            this.chbIsNotDownloaded.AutoSize = true;
+            this.chbIsNotDownloaded.Location = new System.Drawing.Point(300, 41);
+            this.chbIsNotDownloaded.Name = "chbIsNotDownloaded";
+            this.chbIsNotDownloaded.Size = new System.Drawing.Size(103, 17);
+            this.chbIsNotDownloaded.TabIndex = 37;
+            this.chbIsNotDownloaded.Text = "NotDownloaded";
+            this.chbIsNotDownloaded.UseVisualStyleBackColor = true;
+            // 
+            // chbIsAllData
+            // 
+            this.chbIsAllData.AutoSize = true;
+            this.chbIsAllData.Location = new System.Drawing.Point(300, 61);
+            this.chbIsAllData.Name = "chbIsAllData";
+            this.chbIsAllData.Size = new System.Drawing.Size(75, 17);
+            this.chbIsAllData.TabIndex = 36;
+            this.chbIsAllData.Text = "SelAllData";
+            this.chbIsAllData.UseVisualStyleBackColor = true;
+            this.chbIsAllData.Click += new System.EventHandler(this.chbIsAllData_Click);
+            // 
+            // chbIsDownloaded
+            // 
+            this.chbIsDownloaded.AutoSize = true;
+            this.chbIsDownloaded.Location = new System.Drawing.Point(300, 21);
+            this.chbIsDownloaded.Name = "chbIsDownloaded";
+            this.chbIsDownloaded.Size = new System.Drawing.Size(86, 17);
+            this.chbIsDownloaded.TabIndex = 35;
+            this.chbIsDownloaded.Text = "Downloaded";
+            this.chbIsDownloaded.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(176, 49);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(28, 13);
+            this.label10.TabIndex = 34;
+            this.label10.Text = "Limit";
+            // 
+            // tbLimitSelectedRows
+            // 
+            this.tbLimitSelectedRows.Location = new System.Drawing.Point(208, 45);
+            this.tbLimitSelectedRows.Name = "tbLimitSelectedRows";
+            this.tbLimitSelectedRows.Size = new System.Drawing.Size(55, 20);
+            this.tbLimitSelectedRows.TabIndex = 33;
+            this.tbLimitSelectedRows.Text = "0";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(91, 48);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(26, 13);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "End";
+            // 
+            // tbToURL
+            // 
+            this.tbToURL.Location = new System.Drawing.Point(117, 45);
+            this.tbToURL.Name = "tbToURL";
+            this.tbToURL.Size = new System.Drawing.Size(55, 20);
+            this.tbToURL.TabIndex = 31;
+            this.tbToURL.Text = "903915";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 48);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(34, 13);
+            this.label12.TabIndex = 30;
+            this.label12.Text = "Begin";
+            // 
+            // tbFromURL
+            // 
+            this.tbFromURL.Location = new System.Drawing.Point(36, 45);
+            this.tbFromURL.Name = "tbFromURL";
+            this.tbFromURL.Size = new System.Drawing.Size(55, 20);
+            this.tbFromURL.TabIndex = 29;
+            this.tbFromURL.Text = "900000";
+            // 
+            // btnStartDownloadTask
+            // 
+            this.btnStartDownloadTask.Location = new System.Drawing.Point(6, 71);
+            this.btnStartDownloadTask.Name = "btnStartDownloadTask";
+            this.btnStartDownloadTask.Size = new System.Drawing.Size(73, 23);
+            this.btnStartDownloadTask.TabIndex = 10;
+            this.btnStartDownloadTask.Text = "Start Downl";
+            this.btnStartDownloadTask.UseVisualStyleBackColor = true;
+            this.btnStartDownloadTask.Click += new System.EventHandler(this.btnStartDownloadTask_Click);
+            // 
+            // radioButtonGallerynovaD
+            // 
+            this.radioButtonGallerynovaD.AutoSize = true;
+            this.radioButtonGallerynovaD.Location = new System.Drawing.Point(201, 18);
+            this.radioButtonGallerynovaD.Name = "radioButtonGallerynovaD";
+            this.radioButtonGallerynovaD.Size = new System.Drawing.Size(93, 17);
+            this.radioButtonGallerynovaD.TabIndex = 9;
+            this.radioButtonGallerynovaD.Text = "gallerynova.se";
+            this.radioButtonGallerynovaD.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonGallerysenseD
+            // 
+            this.radioButtonGallerysenseD.AutoSize = true;
+            this.radioButtonGallerysenseD.Checked = true;
+            this.radioButtonGallerysenseD.Location = new System.Drawing.Point(6, 18);
+            this.radioButtonGallerysenseD.Name = "radioButtonGallerysenseD";
+            this.radioButtonGallerysenseD.Size = new System.Drawing.Size(97, 17);
+            this.radioButtonGallerysenseD.TabIndex = 7;
+            this.radioButtonGallerysenseD.TabStop = true;
+            this.radioButtonGallerysenseD.Text = "gallerysense.se";
+            this.radioButtonGallerysenseD.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonImagezillaD
+            // 
+            this.radioButtonImagezillaD.AutoSize = true;
+            this.radioButtonImagezillaD.Location = new System.Drawing.Point(107, 18);
+            this.radioButtonImagezillaD.Name = "radioButtonImagezillaD";
+            this.radioButtonImagezillaD.Size = new System.Drawing.Size(88, 17);
+            this.radioButtonImagezillaD.TabIndex = 8;
+            this.radioButtonImagezillaD.Text = "imagezilla.net";
+            this.radioButtonImagezillaD.UseVisualStyleBackColor = true;
+            // 
+            // btnStartEx
+            // 
+            this.btnStartEx.Location = new System.Drawing.Point(487, 76);
+            this.btnStartEx.Name = "btnStartEx";
+            this.btnStartEx.Size = new System.Drawing.Size(120, 23);
+            this.btnStartEx.TabIndex = 3;
+            this.btnStartEx.Text = "GetDBData";
+            this.btnStartEx.UseVisualStyleBackColor = true;
+            this.btnStartEx.Click += new System.EventHandler(this.btnStartEx_Click);
             // 
             // groupBox3
             // 
@@ -578,16 +764,6 @@
             this.label9.Size = new System.Drawing.Size(54, 13);
             this.label9.TabIndex = 4;
             this.label9.Text = "Max Task";
-            // 
-            // btnStartEx
-            // 
-            this.btnStartEx.Location = new System.Drawing.Point(487, 76);
-            this.btnStartEx.Name = "btnStartEx";
-            this.btnStartEx.Size = new System.Drawing.Size(120, 23);
-            this.btnStartEx.TabIndex = 3;
-            this.btnStartEx.Text = "GetDBData";
-            this.btnStartEx.UseVisualStyleBackColor = true;
-            this.btnStartEx.Click += new System.EventHandler(this.btnStartEx_Click);
             // 
             // btnStopAllTask
             // 
@@ -702,178 +878,6 @@
             // 
             this.folderBrowserDialog1.ShowNewFolderButton = false;
             // 
-            // tbTargetDownloadFolder
-            // 
-            this.tbTargetDownloadFolder.Location = new System.Drawing.Point(12, 66);
-            this.tbTargetDownloadFolder.Name = "tbTargetDownloadFolder";
-            this.tbTargetDownloadFolder.Size = new System.Drawing.Size(234, 20);
-            this.tbTargetDownloadFolder.TabIndex = 7;
-            // 
-            // btnSelectTargetFolder
-            // 
-            this.btnSelectTargetFolder.Location = new System.Drawing.Point(252, 63);
-            this.btnSelectTargetFolder.Name = "btnSelectTargetFolder";
-            this.btnSelectTargetFolder.Size = new System.Drawing.Size(10, 23);
-            this.btnSelectTargetFolder.TabIndex = 8;
-            this.btnSelectTargetFolder.UseVisualStyleBackColor = true;
-            this.btnSelectTargetFolder.Click += new System.EventHandler(this.btnSelectTargetFolder_Click);
-            // 
-            // btnStartDownloadSingle
-            // 
-            this.btnStartDownloadSingle.Location = new System.Drawing.Point(264, 63);
-            this.btnStartDownloadSingle.Name = "btnStartDownloadSingle";
-            this.btnStartDownloadSingle.Size = new System.Drawing.Size(73, 23);
-            this.btnStartDownloadSingle.TabIndex = 9;
-            this.btnStartDownloadSingle.Text = "Start Downl";
-            this.btnStartDownloadSingle.UseVisualStyleBackColor = true;
-            this.btnStartDownloadSingle.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.chbIsNotDownloaded);
-            this.groupBox5.Controls.Add(this.chbIsAllData);
-            this.groupBox5.Controls.Add(this.chbIsDownloaded);
-            this.groupBox5.Controls.Add(this.label10);
-            this.groupBox5.Controls.Add(this.tbLimitSelectedRows);
-            this.groupBox5.Controls.Add(this.label11);
-            this.groupBox5.Controls.Add(this.tbToURL);
-            this.groupBox5.Controls.Add(this.label12);
-            this.groupBox5.Controls.Add(this.tbFromURL);
-            this.groupBox5.Controls.Add(this.btnStartDownloadTask);
-            this.groupBox5.Controls.Add(this.radioButtonGallerynovaD);
-            this.groupBox5.Controls.Add(this.radioButtonGallerysenseD);
-            this.groupBox5.Controls.Add(this.radioButtonImagezillaD);
-            this.groupBox5.Controls.Add(this.btnStartEx);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox5.Location = new System.Drawing.Point(297, 0);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(612, 105);
-            this.groupBox5.TabIndex = 3;
-            this.groupBox5.TabStop = false;
-            // 
-            // radioButtonGallerynovaD
-            // 
-            this.radioButtonGallerynovaD.AutoSize = true;
-            this.radioButtonGallerynovaD.Location = new System.Drawing.Point(201, 18);
-            this.radioButtonGallerynovaD.Name = "radioButtonGallerynovaD";
-            this.radioButtonGallerynovaD.Size = new System.Drawing.Size(93, 17);
-            this.radioButtonGallerynovaD.TabIndex = 9;
-            this.radioButtonGallerynovaD.Text = "gallerynova.se";
-            this.radioButtonGallerynovaD.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonGallerysenseD
-            // 
-            this.radioButtonGallerysenseD.AutoSize = true;
-            this.radioButtonGallerysenseD.Checked = true;
-            this.radioButtonGallerysenseD.Location = new System.Drawing.Point(6, 18);
-            this.radioButtonGallerysenseD.Name = "radioButtonGallerysenseD";
-            this.radioButtonGallerysenseD.Size = new System.Drawing.Size(97, 17);
-            this.radioButtonGallerysenseD.TabIndex = 7;
-            this.radioButtonGallerysenseD.TabStop = true;
-            this.radioButtonGallerysenseD.Text = "gallerysense.se";
-            this.radioButtonGallerysenseD.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonImagezillaD
-            // 
-            this.radioButtonImagezillaD.AutoSize = true;
-            this.radioButtonImagezillaD.Location = new System.Drawing.Point(107, 18);
-            this.radioButtonImagezillaD.Name = "radioButtonImagezillaD";
-            this.radioButtonImagezillaD.Size = new System.Drawing.Size(88, 17);
-            this.radioButtonImagezillaD.TabIndex = 8;
-            this.radioButtonImagezillaD.Text = "imagezilla.net";
-            this.radioButtonImagezillaD.UseVisualStyleBackColor = true;
-            // 
-            // btnStartDownloadTask
-            // 
-            this.btnStartDownloadTask.Location = new System.Drawing.Point(6, 71);
-            this.btnStartDownloadTask.Name = "btnStartDownloadTask";
-            this.btnStartDownloadTask.Size = new System.Drawing.Size(73, 23);
-            this.btnStartDownloadTask.TabIndex = 10;
-            this.btnStartDownloadTask.Text = "Start Downl";
-            this.btnStartDownloadTask.UseVisualStyleBackColor = true;
-            this.btnStartDownloadTask.Click += new System.EventHandler(this.btnStartDownloadTask_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(176, 49);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(28, 13);
-            this.label10.TabIndex = 34;
-            this.label10.Text = "Limit";
-            // 
-            // tbLimitSelectedRows
-            // 
-            this.tbLimitSelectedRows.Location = new System.Drawing.Point(208, 45);
-            this.tbLimitSelectedRows.Name = "tbLimitSelectedRows";
-            this.tbLimitSelectedRows.Size = new System.Drawing.Size(55, 20);
-            this.tbLimitSelectedRows.TabIndex = 33;
-            this.tbLimitSelectedRows.Text = "0";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(91, 48);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(26, 13);
-            this.label11.TabIndex = 32;
-            this.label11.Text = "End";
-            // 
-            // tbToURL
-            // 
-            this.tbToURL.Location = new System.Drawing.Point(117, 45);
-            this.tbToURL.Name = "tbToURL";
-            this.tbToURL.Size = new System.Drawing.Size(55, 20);
-            this.tbToURL.TabIndex = 31;
-            this.tbToURL.Text = "903915";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 48);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(34, 13);
-            this.label12.TabIndex = 30;
-            this.label12.Text = "Begin";
-            // 
-            // tbFromURL
-            // 
-            this.tbFromURL.Location = new System.Drawing.Point(36, 45);
-            this.tbFromURL.Name = "tbFromURL";
-            this.tbFromURL.Size = new System.Drawing.Size(55, 20);
-            this.tbFromURL.TabIndex = 29;
-            this.tbFromURL.Text = "900000";
-            // 
-            // chbIsDownloaded
-            // 
-            this.chbIsDownloaded.AutoSize = true;
-            this.chbIsDownloaded.Location = new System.Drawing.Point(300, 21);
-            this.chbIsDownloaded.Name = "chbIsDownloaded";
-            this.chbIsDownloaded.Size = new System.Drawing.Size(86, 17);
-            this.chbIsDownloaded.TabIndex = 35;
-            this.chbIsDownloaded.Text = "Downloaded";
-            this.chbIsDownloaded.UseVisualStyleBackColor = true;
-            // 
-            // chbIsAllData
-            // 
-            this.chbIsAllData.AutoSize = true;
-            this.chbIsAllData.Location = new System.Drawing.Point(300, 61);
-            this.chbIsAllData.Name = "chbIsAllData";
-            this.chbIsAllData.Size = new System.Drawing.Size(75, 17);
-            this.chbIsAllData.TabIndex = 36;
-            this.chbIsAllData.Text = "SelAllData";
-            this.chbIsAllData.UseVisualStyleBackColor = true;
-            // 
-            // chbIsNotDownloaded
-            // 
-            this.chbIsNotDownloaded.AutoSize = true;
-            this.chbIsNotDownloaded.Location = new System.Drawing.Point(300, 41);
-            this.chbIsNotDownloaded.Name = "chbIsNotDownloaded";
-            this.chbIsNotDownloaded.Size = new System.Drawing.Size(103, 17);
-            this.chbIsNotDownloaded.TabIndex = 37;
-            this.chbIsNotDownloaded.Text = "NotDownloaded";
-            this.chbIsNotDownloaded.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -901,8 +905,10 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgMainData)).EndInit();
             this.panel4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -910,8 +916,6 @@
             this.panel7.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -941,7 +945,7 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnStartTask;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgMainData;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbNumberOfEndUrl;
