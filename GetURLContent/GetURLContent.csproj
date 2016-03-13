@@ -62,11 +62,22 @@
     <Compile Include="FormErrorList.Designer.cs">
       <DependentUpon>FormErrorList.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormShowContent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowContent.Designer.cs">
+      <DependentUpon>FormShowContent.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormURLLink.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormURLLink.Designer.cs">
       <DependentUpon>FormURLLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainData.xsd</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +86,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormErrorList.resx">
       <DependentUpon>FormErrorList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowContent.resx">
+      <DependentUpon>FormShowContent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormURLLink.resx">
       <DependentUpon>FormURLLink.cs</DependentUpon>
@@ -89,6 +103,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="MainData.xsc">
+      <DependentUpon>MainData.xsd</DependentUpon>
+    </None>
+    <None Include="MainData.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MainData.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="MainData.xss">
+      <DependentUpon>MainData.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

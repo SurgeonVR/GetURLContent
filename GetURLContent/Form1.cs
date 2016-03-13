@@ -557,7 +557,7 @@ namespace GetURLContent
             string SQLTextMiidle_03 = " order by SourceSiteID ";
             string SQLTextLast = chbIsAllData.Checked ? tbLimitSelectedRows.Text == "0" ? string.Empty : " Limit " + tbLimitSelectedRows.Text : tbLimitSelectedRows.Text != "0" ? " Limit " + tbLimitSelectedRows.Text : string.Empty;
 
-            DataSet dt = new DataSet();
+            MainData dt = new MainData();
             dt.Reset();
             SQLiteCommand cmd = new SQLiteCommand();
             cmd.CommandText = SQLTextFirst + SQLTextMiidle + SQLTextMiidle_01 + SQLTextMiidle_02 + SQLTextMiidle_03 + SQLTextLast;
@@ -633,20 +633,9 @@ namespace GetURLContent
                 //cmd.Parameters.Add(param);
                 //cmd.Parameters.Add("@birth_date", DbType.DateTime).Value = DateTime.Parse("2000-01-15");
 
-
-
                 //cmd.Parameters.Add("@DownloadStateDate", DbType.DateTime).Value = DateTime.Now;
                 cmd.Parameters.AddWithValue("@Id", URLdata[0].ToString());
                 cmd.Parameters.AddWithValue("@DownloadStateErrorText", URLdata[1].ToString());
-
-
-
-
-
-
-
-
-
                 cmd.ExecuteNonQuery();
 
                 cn.Close();
@@ -694,6 +683,22 @@ namespace GetURLContent
             }
         }
 
+        // 12.03.16 return Path to Temp directory
+        string GetTempDir()
+        {
+            string RelPath = String.Empty;
+            string DbFilePath;
+            DbFilePath = Environment.CurrentDirectory;
+            var st = DbFilePath.Split('\\');
+            foreach (var q in st)
+            {
+                RelPath = q.ToUpper() == "BIN" ? RelPath + @"Temp\" : RelPath + q + @"\";
+                if (q.ToUpper() == "BIN")
+                    break;
+
+            }
+            return RelPath;
+        }
 
         private void btnStartEx_Click(object sender, EventArgs e)
         {
@@ -966,13 +971,13 @@ namespace GetURLContent
         public class MultiTFileDownload
         {
             private object[] Params;
-            DataSet ds;
+            MainData ds = new MainData();
             int ProgressCount = 0;
 
             public void MainAppTaskCL(object[] Params)
             {
                 this.Params = Params;
-                ds = (DataSet)Params[0];
+                ds = (MainData)Params[0];
 
                 lock (GlobalTaskListLocker) { GlobalTaskList.Clear(); }
 
@@ -1062,8 +1067,8 @@ namespace GetURLContent
                 string err = string.Empty;
                 string TargetURL = ((DataRow)Params[0]).ItemArray.GetValue(4).ToString();
                 string IdTargetURL = ((DataRow)Params[0]).ItemArray.GetValue(0).ToString();
-                string TargetFolder = ((TextBox)Params[2]).Text + @"\" + System.IO.Path.GetFileName(TargetURL);
-                System.Net.WebClient client = new System.Net.WebClient();
+                string TargetFolder = ((TextBox)Params[2]).Text + @"\" + Path.GetFileName(TargetURL);
+                WebClient client = new WebClient();
                 int ErrFlag = 0;
                 string content = string.Empty;
 
@@ -1180,9 +1185,27 @@ namespace GetURLContent
             }
         }
 
+        // save default properties
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Properties.Settings.Default.Save();
+        }
+
+
+        // 08.03.16 
+        private void dgMainData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+
+                FormShowContent FC = new FormShowContent(dgMainData.Rows[e.RowIndex].Cells["colExtractedURL"].Value.ToString(), GetTempDir() );
+                FC.ShowDialog();
+                FC.Close();
+                FC.Dispose();
+               // MessageBox.Show(dgMainData.Rows[e.RowIndex].Cells["colExtractedURL"].Value.ToString());
+
+
+            }
         }
     }
 }

@@ -104,6 +104,17 @@
             this.tbDirectoryStart = new System.Windows.Forms.TextBox();
             this.btnSelectFolder = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSourceSiteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSourceSiteTypeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSourceURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colExtractedURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colExtractedURLError = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colExtractedURLFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDownloadState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDownloadStateErrorText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDownloadStateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInsertDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -523,7 +534,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(915, 607);
+            this.tabPage2.Size = new System.Drawing.Size(915, 585);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "MultiTaskMode";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -534,20 +545,34 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(3, 108);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(909, 496);
+            this.panel6.Size = new System.Drawing.Size(909, 474);
             this.panel6.TabIndex = 8;
             // 
             // dgMainData
             // 
             this.dgMainData.AllowUserToAddRows = false;
             this.dgMainData.AllowUserToDeleteRows = false;
+            this.dgMainData.AllowUserToResizeRows = false;
             this.dgMainData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgMainData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colID,
+            this.colSourceSiteID,
+            this.colSourceSiteTypeID,
+            this.colSourceURL,
+            this.colExtractedURL,
+            this.colExtractedURLError,
+            this.colExtractedURLFileName,
+            this.colDownloadState,
+            this.colDownloadStateErrorText,
+            this.colDownloadStateDate,
+            this.colInsertDate});
             this.dgMainData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgMainData.Location = new System.Drawing.Point(0, 0);
             this.dgMainData.Name = "dgMainData";
             this.dgMainData.ReadOnly = true;
-            this.dgMainData.Size = new System.Drawing.Size(909, 496);
+            this.dgMainData.Size = new System.Drawing.Size(909, 474);
             this.dgMainData.TabIndex = 7;
+            this.dgMainData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgMainData_CellDoubleClick);
             // 
             // panel4
             // 
@@ -811,7 +836,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(915, 607);
+            this.tabPage3.Size = new System.Drawing.Size(915, 585);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -823,7 +848,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(909, 471);
+            this.textBox1.Size = new System.Drawing.Size(909, 449);
             this.textBox1.TabIndex = 8;
             // 
             // panel7
@@ -886,6 +911,83 @@
             // folderBrowserDialog1
             // 
             this.folderBrowserDialog1.ShowNewFolderButton = false;
+            // 
+            // colID
+            // 
+            this.colID.DataPropertyName = "ID";
+            this.colID.HeaderText = "Id";
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            // 
+            // colSourceSiteID
+            // 
+            this.colSourceSiteID.DataPropertyName = "SourceSiteID";
+            this.colSourceSiteID.HeaderText = "SourceSiteID";
+            this.colSourceSiteID.Name = "colSourceSiteID";
+            this.colSourceSiteID.ReadOnly = true;
+            // 
+            // colSourceSiteTypeID
+            // 
+            this.colSourceSiteTypeID.DataPropertyName = "SourceSiteTypeID";
+            this.colSourceSiteTypeID.HeaderText = "SourceSiteTypeID";
+            this.colSourceSiteTypeID.Name = "colSourceSiteTypeID";
+            this.colSourceSiteTypeID.ReadOnly = true;
+            // 
+            // colSourceURL
+            // 
+            this.colSourceURL.DataPropertyName = "SourceURL";
+            this.colSourceURL.HeaderText = "SourceURL";
+            this.colSourceURL.Name = "colSourceURL";
+            this.colSourceURL.ReadOnly = true;
+            // 
+            // colExtractedURL
+            // 
+            this.colExtractedURL.DataPropertyName = "ExtractedURL";
+            this.colExtractedURL.HeaderText = "ExtractedURL";
+            this.colExtractedURL.Name = "colExtractedURL";
+            this.colExtractedURL.ReadOnly = true;
+            // 
+            // colExtractedURLError
+            // 
+            this.colExtractedURLError.DataPropertyName = "ExtractedURLError";
+            this.colExtractedURLError.HeaderText = "ExtractedURLError";
+            this.colExtractedURLError.Name = "colExtractedURLError";
+            this.colExtractedURLError.ReadOnly = true;
+            // 
+            // colExtractedURLFileName
+            // 
+            this.colExtractedURLFileName.DataPropertyName = "ExtractedURLFileName";
+            this.colExtractedURLFileName.HeaderText = "ExtractedURLFileName";
+            this.colExtractedURLFileName.Name = "colExtractedURLFileName";
+            this.colExtractedURLFileName.ReadOnly = true;
+            // 
+            // colDownloadState
+            // 
+            this.colDownloadState.DataPropertyName = "DownloadState";
+            this.colDownloadState.HeaderText = "DownloadState";
+            this.colDownloadState.Name = "colDownloadState";
+            this.colDownloadState.ReadOnly = true;
+            // 
+            // colDownloadStateErrorText
+            // 
+            this.colDownloadStateErrorText.DataPropertyName = "DownloadStateErrorText";
+            this.colDownloadStateErrorText.HeaderText = "DownloadStateErrorText";
+            this.colDownloadStateErrorText.Name = "colDownloadStateErrorText";
+            this.colDownloadStateErrorText.ReadOnly = true;
+            // 
+            // colDownloadStateDate
+            // 
+            this.colDownloadStateDate.DataPropertyName = "DownloadStateDate";
+            this.colDownloadStateDate.HeaderText = "DownloadStateDate";
+            this.colDownloadStateDate.Name = "colDownloadStateDate";
+            this.colDownloadStateDate.ReadOnly = true;
+            // 
+            // colInsertDate
+            // 
+            this.colInsertDate.DataPropertyName = "InsertDate";
+            this.colInsertDate.HeaderText = "InsertDate";
+            this.colInsertDate.Name = "colInsertDate";
+            this.colInsertDate.ReadOnly = true;
             // 
             // Form1
             // 
@@ -1008,6 +1110,17 @@
         private System.Windows.Forms.RadioButton radioButtonImagezillaD;
         private System.Windows.Forms.CheckBox chbIsNotDownloaded;
         private System.Windows.Forms.ToolStripStatusLabel tlSLabelCountCurrentTask;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSourceSiteID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSourceSiteTypeID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSourceURL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colExtractedURL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colExtractedURLError;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colExtractedURLFileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDownloadState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDownloadStateErrorText;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDownloadStateDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInsertDate;
     }
 }
 

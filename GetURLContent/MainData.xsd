@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MainData" targetNamespace="http://tempuri.org/MainData.xsd" xmlns:mstns="http://tempuri.org/MainData.xsd" xmlns="http://tempuri.org/MainData.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MainData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MainData" msprop:Generator_UserDSName="MainData">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="UrlList" msprop:Generator_TableClassName="UrlListDataTable" msprop:Generator_TableVarName="tableUrlList" msprop:Generator_TablePropName="UrlList" msprop:Generator_RowDeletingName="UrlListRowDeleting" msprop:Generator_RowChangingName="UrlListRowChanging" msprop:Generator_RowEvHandlerName="UrlListRowChangeEventHandler" msprop:Generator_RowDeletedName="UrlListRowDeleted" msprop:Generator_UserTableName="UrlList" msprop:Generator_RowChangedName="UrlListRowChanged" msprop:Generator_RowEvArgName="UrlListRowChangeEvent" msprop:Generator_RowClassName="UrlListRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:string" minOccurs="0" />
+              <xs:element name="SourceSiteID" msprop:Generator_ColumnVarNameInTable="columnSourceSiteID" msprop:Generator_ColumnPropNameInRow="SourceSiteID" msprop:Generator_ColumnPropNameInTable="SourceSiteIDColumn" msprop:Generator_UserColumnName="SourceSiteID" type="xs:string" minOccurs="0" />
+              <xs:element name="SourceSiteTypeID" msprop:Generator_ColumnVarNameInTable="columnSourceSiteTypeID" msprop:Generator_ColumnPropNameInRow="SourceSiteTypeID" msprop:Generator_ColumnPropNameInTable="SourceSiteTypeIDColumn" msprop:Generator_UserColumnName="SourceSiteTypeID" type="xs:string" minOccurs="0" />
+              <xs:element name="SourceURL" msprop:Generator_ColumnVarNameInTable="columnSourceURL" msprop:Generator_ColumnPropNameInRow="SourceURL" msprop:Generator_ColumnPropNameInTable="SourceURLColumn" msprop:Generator_UserColumnName="SourceURL" type="xs:string" minOccurs="0" />
+              <xs:element name="ExtractedURL" msprop:Generator_ColumnVarNameInTable="columnExtractedURL" msprop:Generator_ColumnPropNameInRow="ExtractedURL" msprop:Generator_ColumnPropNameInTable="ExtractedURLColumn" msprop:Generator_UserColumnName="ExtractedURL" type="xs:string" minOccurs="0" />
+              <xs:element name="ExtractedURLError" msprop:Generator_ColumnVarNameInTable="columnExtractedURLError" msprop:Generator_ColumnPropNameInRow="ExtractedURLError" msprop:Generator_ColumnPropNameInTable="ExtractedURLErrorColumn" msprop:Generator_UserColumnName="ExtractedURLError" type="xs:string" minOccurs="0" />
+              <xs:element name="ExtractedURLFileName" msprop:Generator_ColumnVarNameInTable="columnExtractedURLFileName" msprop:Generator_ColumnPropNameInRow="ExtractedURLFileName" msprop:Generator_ColumnPropNameInTable="ExtractedURLFileNameColumn" msprop:Generator_UserColumnName="ExtractedURLFileName" type="xs:string" minOccurs="0" />
+              <xs:element name="DownloadState" msprop:Generator_ColumnVarNameInTable="columnDownloadState" msprop:Generator_ColumnPropNameInRow="DownloadState" msprop:Generator_ColumnPropNameInTable="DownloadStateColumn" msprop:Generator_UserColumnName="DownloadState" type="xs:string" minOccurs="0" />
+              <xs:element name="DownloadStateErrorText" msprop:Generator_ColumnVarNameInTable="columnDownloadStateErrorText" msprop:Generator_ColumnPropNameInRow="DownloadStateErrorText" msprop:Generator_ColumnPropNameInTable="DownloadStateErrorTextColumn" msprop:Generator_UserColumnName="DownloadStateErrorText" type="xs:string" minOccurs="0" />
+              <xs:element name="DownloadStateDate" msprop:Generator_ColumnVarNameInTable="columnDownloadStateDate" msprop:Generator_ColumnPropNameInRow="DownloadStateDate" msprop:Generator_ColumnPropNameInTable="DownloadStateDateColumn" msprop:Generator_UserColumnName="DownloadStateDate" type="xs:string" minOccurs="0" />
+              <xs:element name="InsertDate" msprop:Generator_ColumnVarNameInTable="columnInsertDate" msprop:Generator_ColumnPropNameInRow="InsertDate" msprop:Generator_ColumnPropNameInTable="InsertDateColumn" msprop:Generator_UserColumnName="InsertDate" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
