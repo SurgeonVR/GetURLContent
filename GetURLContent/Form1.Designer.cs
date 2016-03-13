@@ -71,6 +71,17 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
             this.dgMainData = new System.Windows.Forms.DataGridView();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSourceSiteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSourceSiteTypeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSourceURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colExtractedURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colExtractedURLError = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colExtractedURLFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDownloadState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDownloadStateErrorText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDownloadStateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInsertDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.chbIsNotDownloaded = new System.Windows.Forms.CheckBox();
@@ -104,17 +115,6 @@
             this.tbDirectoryStart = new System.Windows.Forms.TextBox();
             this.btnSelectFolder = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSourceSiteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSourceSiteTypeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSourceURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colExtractedURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colExtractedURLError = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colExtractedURLFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDownloadState = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDownloadStateErrorText = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDownloadStateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInsertDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -574,6 +574,83 @@
             this.dgMainData.TabIndex = 7;
             this.dgMainData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgMainData_CellDoubleClick);
             // 
+            // colID
+            // 
+            this.colID.DataPropertyName = "ID";
+            this.colID.HeaderText = "Id";
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            // 
+            // colSourceSiteID
+            // 
+            this.colSourceSiteID.DataPropertyName = "SourceSiteID";
+            this.colSourceSiteID.HeaderText = "SourceSiteID";
+            this.colSourceSiteID.Name = "colSourceSiteID";
+            this.colSourceSiteID.ReadOnly = true;
+            // 
+            // colSourceSiteTypeID
+            // 
+            this.colSourceSiteTypeID.DataPropertyName = "SourceSiteTypeID";
+            this.colSourceSiteTypeID.HeaderText = "SourceSiteTypeID";
+            this.colSourceSiteTypeID.Name = "colSourceSiteTypeID";
+            this.colSourceSiteTypeID.ReadOnly = true;
+            // 
+            // colSourceURL
+            // 
+            this.colSourceURL.DataPropertyName = "SourceURL";
+            this.colSourceURL.HeaderText = "SourceURL";
+            this.colSourceURL.Name = "colSourceURL";
+            this.colSourceURL.ReadOnly = true;
+            // 
+            // colExtractedURL
+            // 
+            this.colExtractedURL.DataPropertyName = "ExtractedURL";
+            this.colExtractedURL.HeaderText = "ExtractedURL";
+            this.colExtractedURL.Name = "colExtractedURL";
+            this.colExtractedURL.ReadOnly = true;
+            // 
+            // colExtractedURLError
+            // 
+            this.colExtractedURLError.DataPropertyName = "ExtractedURLError";
+            this.colExtractedURLError.HeaderText = "ExtractedURLError";
+            this.colExtractedURLError.Name = "colExtractedURLError";
+            this.colExtractedURLError.ReadOnly = true;
+            // 
+            // colExtractedURLFileName
+            // 
+            this.colExtractedURLFileName.DataPropertyName = "ExtractedURLFileName";
+            this.colExtractedURLFileName.HeaderText = "ExtractedURLFileName";
+            this.colExtractedURLFileName.Name = "colExtractedURLFileName";
+            this.colExtractedURLFileName.ReadOnly = true;
+            // 
+            // colDownloadState
+            // 
+            this.colDownloadState.DataPropertyName = "DownloadState";
+            this.colDownloadState.HeaderText = "DownloadState";
+            this.colDownloadState.Name = "colDownloadState";
+            this.colDownloadState.ReadOnly = true;
+            // 
+            // colDownloadStateErrorText
+            // 
+            this.colDownloadStateErrorText.DataPropertyName = "DownloadStateErrorText";
+            this.colDownloadStateErrorText.HeaderText = "DownloadStateErrorText";
+            this.colDownloadStateErrorText.Name = "colDownloadStateErrorText";
+            this.colDownloadStateErrorText.ReadOnly = true;
+            // 
+            // colDownloadStateDate
+            // 
+            this.colDownloadStateDate.DataPropertyName = "DownloadStateDate";
+            this.colDownloadStateDate.HeaderText = "DownloadStateDate";
+            this.colDownloadStateDate.Name = "colDownloadStateDate";
+            this.colDownloadStateDate.ReadOnly = true;
+            // 
+            // colInsertDate
+            // 
+            this.colInsertDate.DataPropertyName = "InsertDate";
+            this.colInsertDate.HeaderText = "InsertDate";
+            this.colInsertDate.Name = "colInsertDate";
+            this.colInsertDate.ReadOnly = true;
+            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.groupBox5);
@@ -911,83 +988,6 @@
             // folderBrowserDialog1
             // 
             this.folderBrowserDialog1.ShowNewFolderButton = false;
-            // 
-            // colID
-            // 
-            this.colID.DataPropertyName = "ID";
-            this.colID.HeaderText = "Id";
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            // 
-            // colSourceSiteID
-            // 
-            this.colSourceSiteID.DataPropertyName = "SourceSiteID";
-            this.colSourceSiteID.HeaderText = "SourceSiteID";
-            this.colSourceSiteID.Name = "colSourceSiteID";
-            this.colSourceSiteID.ReadOnly = true;
-            // 
-            // colSourceSiteTypeID
-            // 
-            this.colSourceSiteTypeID.DataPropertyName = "SourceSiteTypeID";
-            this.colSourceSiteTypeID.HeaderText = "SourceSiteTypeID";
-            this.colSourceSiteTypeID.Name = "colSourceSiteTypeID";
-            this.colSourceSiteTypeID.ReadOnly = true;
-            // 
-            // colSourceURL
-            // 
-            this.colSourceURL.DataPropertyName = "SourceURL";
-            this.colSourceURL.HeaderText = "SourceURL";
-            this.colSourceURL.Name = "colSourceURL";
-            this.colSourceURL.ReadOnly = true;
-            // 
-            // colExtractedURL
-            // 
-            this.colExtractedURL.DataPropertyName = "ExtractedURL";
-            this.colExtractedURL.HeaderText = "ExtractedURL";
-            this.colExtractedURL.Name = "colExtractedURL";
-            this.colExtractedURL.ReadOnly = true;
-            // 
-            // colExtractedURLError
-            // 
-            this.colExtractedURLError.DataPropertyName = "ExtractedURLError";
-            this.colExtractedURLError.HeaderText = "ExtractedURLError";
-            this.colExtractedURLError.Name = "colExtractedURLError";
-            this.colExtractedURLError.ReadOnly = true;
-            // 
-            // colExtractedURLFileName
-            // 
-            this.colExtractedURLFileName.DataPropertyName = "ExtractedURLFileName";
-            this.colExtractedURLFileName.HeaderText = "ExtractedURLFileName";
-            this.colExtractedURLFileName.Name = "colExtractedURLFileName";
-            this.colExtractedURLFileName.ReadOnly = true;
-            // 
-            // colDownloadState
-            // 
-            this.colDownloadState.DataPropertyName = "DownloadState";
-            this.colDownloadState.HeaderText = "DownloadState";
-            this.colDownloadState.Name = "colDownloadState";
-            this.colDownloadState.ReadOnly = true;
-            // 
-            // colDownloadStateErrorText
-            // 
-            this.colDownloadStateErrorText.DataPropertyName = "DownloadStateErrorText";
-            this.colDownloadStateErrorText.HeaderText = "DownloadStateErrorText";
-            this.colDownloadStateErrorText.Name = "colDownloadStateErrorText";
-            this.colDownloadStateErrorText.ReadOnly = true;
-            // 
-            // colDownloadStateDate
-            // 
-            this.colDownloadStateDate.DataPropertyName = "DownloadStateDate";
-            this.colDownloadStateDate.HeaderText = "DownloadStateDate";
-            this.colDownloadStateDate.Name = "colDownloadStateDate";
-            this.colDownloadStateDate.ReadOnly = true;
-            // 
-            // colInsertDate
-            // 
-            this.colInsertDate.DataPropertyName = "InsertDate";
-            this.colInsertDate.HeaderText = "InsertDate";
-            this.colInsertDate.Name = "colInsertDate";
-            this.colInsertDate.ReadOnly = true;
             // 
             // Form1
             // 

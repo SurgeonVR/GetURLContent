@@ -89,5 +89,14 @@ namespace GetURLContent.Properties {
                 this["tbTargetDownloadFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F:\\TEMP\\")]
+        public string TempDir {
+            get {
+                return ((string)(this["TempDir"]));
+            }
+        }
     }
 }

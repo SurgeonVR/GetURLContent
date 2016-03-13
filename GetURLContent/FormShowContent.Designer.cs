@@ -33,7 +33,9 @@
             this.progressBarDownload = new System.Windows.Forms.ToolStripProgressBar();
             this.tlbtnClose = new System.Windows.Forms.ToolStripDropDownButton();
             this.tlbtnRefresh = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tlslFileSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.pictBox = new System.Windows.Forms.PictureBox();
+            this.tlbtnReJectWebRequest = new System.Windows.Forms.ToolStripDropDownButton();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictBox)).BeginInit();
             this.SuspendLayout();
@@ -43,10 +45,12 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.progressBarDownload,
             this.tlbtnClose,
-            this.tlbtnRefresh});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 393);
+            this.tlbtnRefresh,
+            this.tlslFileSize,
+            this.tlbtnReJectWebRequest});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 466);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(525, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(659, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -77,26 +81,43 @@
             this.tlbtnRefresh.Text = "Refresh";
             this.tlbtnRefresh.Click += new System.EventHandler(this.tlbtnRefresh_Click);
             // 
+            // tlslFileSize
+            // 
+            this.tlslFileSize.Name = "tlslFileSize";
+            this.tlslFileSize.Size = new System.Drawing.Size(45, 17);
+            this.tlslFileSize.Text = "File Size";
+            // 
             // pictBox
             // 
             this.pictBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictBox.Location = new System.Drawing.Point(0, 0);
             this.pictBox.Name = "pictBox";
-            this.pictBox.Size = new System.Drawing.Size(525, 393);
+            this.pictBox.Size = new System.Drawing.Size(659, 466);
             this.pictBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictBox.TabIndex = 9;
             this.pictBox.TabStop = false;
+            // 
+            // tlbtnReJectWebRequest
+            // 
+            this.tlbtnReJectWebRequest.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tlbtnReJectWebRequest.Enabled = false;
+            this.tlbtnReJectWebRequest.Image = ((System.Drawing.Image)(resources.GetObject("tlbtnReJectWebRequest.Image")));
+            this.tlbtnReJectWebRequest.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tlbtnReJectWebRequest.Name = "tlbtnReJectWebRequest";
+            this.tlbtnReJectWebRequest.Size = new System.Drawing.Size(70, 20);
+            this.tlbtnReJectWebRequest.Text = "RejectReq";
+            this.tlbtnReJectWebRequest.Click += new System.EventHandler(this.tlbtnReJectWebRequest_Click);
             // 
             // FormShowContent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 415);
+            this.ClientSize = new System.Drawing.Size(659, 488);
             this.Controls.Add(this.pictBox);
             this.Controls.Add(this.statusStrip1);
             this.Name = "FormShowContent";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FormShowContent";
+            this.Text = "Load File From URL";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictBox)).EndInit();
@@ -112,5 +133,7 @@
         private System.Windows.Forms.ToolStripDropDownButton tlbtnClose;
         private System.Windows.Forms.ToolStripDropDownButton tlbtnRefresh;
         private System.Windows.Forms.PictureBox pictBox;
+        private System.Windows.Forms.ToolStripStatusLabel tlslFileSize;
+        private System.Windows.Forms.ToolStripDropDownButton tlbtnReJectWebRequest;
     }
 }

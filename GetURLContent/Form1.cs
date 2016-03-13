@@ -685,9 +685,16 @@ namespace GetURLContent
 
         // 12.03.16 return Path to Temp directory
         string GetTempDir()
-        {
+        {  
             string RelPath = String.Empty;
             string DbFilePath;
+
+            if (Properties.Settings.Default.TempDir != string.Empty && Directory.Exists(Properties.Settings.Default.TempDir))
+            {
+                RelPath = Properties.Settings.Default.TempDir;
+            }else
+            { 
+
             DbFilePath = Environment.CurrentDirectory;
             var st = DbFilePath.Split('\\');
             foreach (var q in st)
@@ -696,6 +703,7 @@ namespace GetURLContent
                 if (q.ToUpper() == "BIN")
                     break;
 
+            }
             }
             return RelPath;
         }
@@ -926,7 +934,7 @@ namespace GetURLContent
                 };
                 //lock (ActiveTaskCountLocker) { ActiveTaskCount.Text = GlobalTaskList.Count().ToString();  }
                 ((EventHandler)vURLAddress[3])(GlobalTaskList.Count(), new EventArgs()); // 08.03.16 Shof count of active task
-                ((EventHandler)vURLAddress[4])(intURL, new EventArgs()); // 08.03.16 Shof name of active task
+                ((EventHandler)vURLAddress[4])(intURL + " --> " + match1.Value.ToString(), new EventArgs()); // 08.03.16 Shof name of active task
                 lock (TransferTextResultLocker) { TransferTextResult.Text = match1.Value; }
                 lock (TransferTextSourceLocker) { TransferTextSource.Text = intURL; }
                 DBOperations db = new DBOperations();
@@ -1197,15 +1205,20 @@ namespace GetURLContent
         {
             if (e.RowIndex >= 0)
             {
-
-                FormShowContent FC = new FormShowContent(dgMainData.Rows[e.RowIndex].Cells["colExtractedURL"].Value.ToString(), GetTempDir() );
-                FC.ShowDialog();
-                FC.Close();
-                FC.Dispose();
-               // MessageBox.Show(dgMainData.Rows[e.RowIndex].Cells["colExtractedURL"].Value.ToString());
+                try
+                {
+                    FormShowContent FC = new FormShowContent(dgMainData.Rows[e.RowIndex].Cells["colExtractedURL"].Value.ToString(), GetTempDir());
+                    FC.ShowDialog();
+                    FC.Close();
+                    FC.Dispose();
+                    // MessageBox.Show(dgMainData.Rows[e.RowIndex].Cells["colExtractedURL"].Value.ToString());
+                } 
+                catch  (Exception ex)
+                { MessageBox.Show(ex.Message, "Error ", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
 
             }
         }
+
     }
 }
