@@ -48,7 +48,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnStartDownloadSingle = new System.Windows.Forms.Button();
             this.btnSelectTargetFolder = new System.Windows.Forms.Button();
-            this.tbTargetDownloadFolder = new System.Windows.Forms.TextBox();
             this.radioButtonGallerynova = new System.Windows.Forms.RadioButton();
             this.radioButtonGallerysense = new System.Windows.Forms.RadioButton();
             this.btnGetURLsLink = new System.Windows.Forms.Button();
@@ -115,6 +114,7 @@
             this.tbDirectoryStart = new System.Windows.Forms.TextBox();
             this.btnSelectFolder = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.tbTargetDownloadFolder = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -254,7 +254,7 @@
             this.tbPartOfUrl.Name = "tbPartOfUrl";
             this.tbPartOfUrl.Size = new System.Drawing.Size(387, 20);
             this.tbPartOfUrl.TabIndex = 23;
-            this.tbPartOfUrl.Text = "http://gallerysense.se/site/v/";
+            this.tbPartOfUrl.Text = "http://pixsense.net/site/v/";
             // 
             // label4
             // 
@@ -336,15 +336,6 @@
             this.btnSelectTargetFolder.UseVisualStyleBackColor = true;
             this.btnSelectTargetFolder.Click += new System.EventHandler(this.btnSelectTargetFolder_Click);
             // 
-            // tbTargetDownloadFolder
-            // 
-            this.tbTargetDownloadFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::GetURLContent.Properties.Settings.Default, "tbTargetDownloadFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbTargetDownloadFolder.Location = new System.Drawing.Point(12, 66);
-            this.tbTargetDownloadFolder.Name = "tbTargetDownloadFolder";
-            this.tbTargetDownloadFolder.Size = new System.Drawing.Size(234, 20);
-            this.tbTargetDownloadFolder.TabIndex = 7;
-            this.tbTargetDownloadFolder.Text = global::GetURLContent.Properties.Settings.Default.tbTargetDownloadFolder;
-            // 
             // radioButtonGallerynova
             // 
             this.radioButtonGallerynova.AutoSize = true;
@@ -361,10 +352,10 @@
             this.radioButtonGallerysense.Checked = true;
             this.radioButtonGallerysense.Location = new System.Drawing.Point(21, 19);
             this.radioButtonGallerysense.Name = "radioButtonGallerysense";
-            this.radioButtonGallerysense.Size = new System.Drawing.Size(97, 17);
+            this.radioButtonGallerysense.Size = new System.Drawing.Size(84, 17);
             this.radioButtonGallerysense.TabIndex = 2;
             this.radioButtonGallerysense.TabStop = true;
-            this.radioButtonGallerysense.Text = "gallerysense.se";
+            this.radioButtonGallerysense.Text = "pixsense.net";
             this.radioButtonGallerysense.UseVisualStyleBackColor = true;
             // 
             // btnGetURLsLink
@@ -792,10 +783,10 @@
             this.radioButtonGallerysenseD.Checked = true;
             this.radioButtonGallerysenseD.Location = new System.Drawing.Point(6, 18);
             this.radioButtonGallerysenseD.Name = "radioButtonGallerysenseD";
-            this.radioButtonGallerysenseD.Size = new System.Drawing.Size(97, 17);
+            this.radioButtonGallerysenseD.Size = new System.Drawing.Size(84, 17);
             this.radioButtonGallerysenseD.TabIndex = 7;
             this.radioButtonGallerysenseD.TabStop = true;
-            this.radioButtonGallerysenseD.Text = "gallerysense.se";
+            this.radioButtonGallerysenseD.Text = "pixsense.net";
             this.radioButtonGallerysenseD.UseVisualStyleBackColor = true;
             // 
             // radioButtonImagezillaD
@@ -989,6 +980,15 @@
             // 
             this.folderBrowserDialog1.ShowNewFolderButton = false;
             // 
+            // tbTargetDownloadFolder
+            // 
+            this.tbTargetDownloadFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::GetURLContent.Properties.Settings.Default, "tbTargetDownloadFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbTargetDownloadFolder.Location = new System.Drawing.Point(12, 66);
+            this.tbTargetDownloadFolder.Name = "tbTargetDownloadFolder";
+            this.tbTargetDownloadFolder.Size = new System.Drawing.Size(234, 20);
+            this.tbTargetDownloadFolder.TabIndex = 7;
+            this.tbTargetDownloadFolder.Text = global::GetURLContent.Properties.Settings.Default.tbTargetDownloadFolder;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -998,7 +998,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Get URL Content v1.1.2  b08.03.16";
+            this.Text = "Get URL Content v1.1.3  b08.08.16";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
