@@ -206,7 +206,7 @@ namespace GetURLContent
         private void MainApp()
         {
             System.Net.WebClient client = new System.Net.WebClient();
-
+            client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
             this.progressBar1.Maximum = this.tbSourceURLs.Lines.Count();
             this.progressBar1.Value = 0;
             this.tbExtractResultURLs.Clear();
@@ -224,9 +224,9 @@ namespace GetURLContent
             foreach (string s in my_array)
             {
                 try { content = client.DownloadString(s); }
-                catch
+                catch (Exception e)
                 {
-                    ErrorList.Add(s);
+                    ErrorList.Add(string.Format("{0},{1}",s,e.Message.ToString()) );
                     this.toolStripStatusLabelErrorFlag.Visible = true;
                 }
                 finally { this.ErrorArrayList = ErrorList.ToArray(); }
@@ -733,7 +733,7 @@ namespace GetURLContent
 
                 for (int i = vBegNumber; i < vEndNumber + 1; i++)
                 {
-                    vUrl = string.Format("{0}{1}{2}{3}", this.tbPartOfUrl.Text, i.ToString(), this.tbEndOfUrl.Text, System.Environment.NewLine);
+                    vUrl = string.Format("{0}{1}{2}{3}{4}{5}", this.tbPartOfUrl.Text, i.ToString(),"#187&", i.ToString(), this.tbEndOfUrl.Text, System.Environment.NewLine);
                     t.Add(vUrl);
                     this.progressBar1.Value = i;
                 }

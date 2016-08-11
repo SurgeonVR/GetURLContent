@@ -237,7 +237,7 @@
             this.tbNumberOfEndUrl.Name = "tbNumberOfEndUrl";
             this.tbNumberOfEndUrl.Size = new System.Drawing.Size(55, 20);
             this.tbNumberOfEndUrl.TabIndex = 25;
-            this.tbNumberOfEndUrl.Text = "903915";
+            this.tbNumberOfEndUrl.Text = "322648";
             // 
             // label5
             // 
@@ -290,7 +290,7 @@
             this.tbNumberOfBeginUrl.Name = "tbNumberOfBeginUrl";
             this.tbNumberOfBeginUrl.Size = new System.Drawing.Size(55, 20);
             this.tbNumberOfBeginUrl.TabIndex = 17;
-            this.tbNumberOfBeginUrl.Text = "900000";
+            this.tbNumberOfBeginUrl.Text = "183006";
             // 
             // tbEndOfUrl
             // 
@@ -738,7 +738,7 @@
             this.tbToURL.Name = "tbToURL";
             this.tbToURL.Size = new System.Drawing.Size(55, 20);
             this.tbToURL.TabIndex = 31;
-            this.tbToURL.Text = "903915";
+            this.tbToURL.Text = "305456";
             // 
             // label12
             // 
@@ -755,7 +755,7 @@
             this.tbFromURL.Name = "tbFromURL";
             this.tbFromURL.Size = new System.Drawing.Size(55, 20);
             this.tbFromURL.TabIndex = 29;
-            this.tbFromURL.Text = "900000";
+            this.tbFromURL.Text = "54";
             // 
             // btnStartDownloadTask
             // 
